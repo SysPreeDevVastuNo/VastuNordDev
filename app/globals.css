@@ -2,25 +2,140 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1c1917;
+
+  --color-brand-orange: #fb602b;
+  --color-brand-orange-dark: #e14f1c;
+  --color-brand-navy: #042b3c;
+  --color-brand-navy-light: #0c3d52;
+  --color-brand-teal: #013c55;
+  --color-brand-cream: #f7f2ec;
+  --color-brand-offwhite: #fafaf9;
+
+  /* Typography — values that represent a repeated design decision rather
+     than a one-off, so they don't get re-typed as arbitrary Tailwind values. */
+  --tracking-eyebrow: 0.2em;
+
+  /* Motion */
+  --transition-fast: 150ms;
+
+  /* Stacking order. Kept as one scale so a new overlay (menu, modal, toast)
+     has an obvious slot instead of an invented z-50 sitting next to another. */
+  --z-header: 50;
+  --z-dropdown: 60;
+  --z-overlay: 70;
+  --z-modal: 80;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
+
+  --color-brand-orange: var(--color-brand-orange);
+  --color-brand-orange-dark: var(--color-brand-orange-dark);
+  --color-brand-navy: var(--color-brand-navy);
+  --color-brand-navy-light: var(--color-brand-navy-light);
+  --color-brand-teal: var(--color-brand-teal);
+  --color-brand-cream: var(--color-brand-cream);
+  --color-brand-offwhite: var(--color-brand-offwhite);
+
+  --tracking-eyebrow: var(--tracking-eyebrow);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ---------------------------------------------------------------------- */
+/* Base — element defaults, typography and accessibility states.          */
+/* ---------------------------------------------------------------------- */
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+    text-wrap: balance;
+  }
+
+  a {
+    text-underline-offset: 2px;
+  }
+
+  a,
+  button {
+    transition-property: color, background-color, border-color;
+    transition-duration: var(--transition-fast);
+    transition-timing-function: var(--ease-out);
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  /* No inputs/textareas/selects exist yet — these defaults are here so the
+     Contact and Resources forms (Phase 2) inherit a consistent look instead
+     of each form re-deriving its own border/radius/focus treatment. */
+  input,
+  textarea,
+  select {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-stone-300);
+    background: var(--background);
+    padding: 0.75rem 1rem;
+    font-size: var(--text-sm);
+    color: var(--foreground);
+    transition: border-color var(--transition-fast) var(--ease-out),
+      box-shadow var(--transition-fast) var(--ease-out);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-stone-400);
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--color-brand-navy);
+    box-shadow: 0 0 0 3px rgba(4, 43, 60, 0.15);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-orange);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background: var(--color-brand-orange);
+    color: #fff;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------------------------------------------------------------------- */
+/* Components — global design-system primitives that live in CSS rather   */
+/* than as a React component (Section/PageContainer/SectionHeader are     */
+/* React components instead — see components/layout and components/ui).  */
+/* ---------------------------------------------------------------------- */
+@layer components {
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-eyebrow;
+  }
+
+  .cta-group {
+    @apply flex flex-wrap items-center gap-4;
+  }
 }
