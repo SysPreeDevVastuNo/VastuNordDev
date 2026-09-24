@@ -17,7 +17,7 @@ export default function PageContainer({
   className?: string;
 }) {
   return (
-    <div className={clsx("mx-auto w-full px-6", sizeStyles[size], className)}>
+    <div className={clsx("mx-auto w-full px-6 md:px-10 lg:px-14", sizeStyles[size], className)}>
       {children}
     </div>
   );

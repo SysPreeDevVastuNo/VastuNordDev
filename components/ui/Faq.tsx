@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { IconChevron } from "@/components/ui/icons";
 
 export default function Faq({ items }: { items: { q: string; a: string }[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -18,13 +19,10 @@ export default function Faq({ items }: { items: { q: string; a: string }[] }) {
               aria-expanded={isOpen}
             >
               <span className="font-medium text-stone-900">{item.q}</span>
-              <span
-                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-stone-300 text-stone-500 transition-transform ${
-                  isOpen ? "rotate-45" : ""
-                }`}
-              >
-                +
-              </span>
+              <IconChevron
+                direction={isOpen ? "down" : "right"}
+                className="h-4 w-4 shrink-0 text-stone-400 transition-transform"
+              />
             </button>
             {isOpen && <p className="pb-5 text-sm leading-relaxed text-stone-600">{item.a}</p>}
           </div>

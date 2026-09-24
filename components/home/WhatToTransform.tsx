@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import clsx from "clsx";
 import Placeholder from "@/components/ui/Placeholder";
-import Tabs from "@/components/ui/Tabs";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import { IconSpaces, IconOutdoors, IconDetails, IconImages } from "@/components/ui/icons";
 
 const options = [
   {
@@ -13,28 +14,28 @@ const options = [
     tab: "Reimagine Spaces",
     title: "Transform the spaces you live in.",
     body: "Reimagine rooms, interiors and homes in entirely new directions.",
-    tags: ["Room Reimagination", "Virtual Home Staging", "Seasonal Styling", "Lighting Reimagination"],
+    Icon: IconSpaces,
   },
   {
     key: "outdoors",
     tab: "Transform Outdoors",
     title: "See your outdoor space differently.",
     body: "Reimagine gardens, landscapes and pools with new materials, planting and light.",
-    tags: ["Garden Reimagination", "Landscape Styling", "Pool Visualization", "Seasonal Views"],
+    Icon: IconOutdoors,
   },
   {
     key: "details",
     tab: "Refine the Details",
     title: "Change the details that shape a space.",
     body: "Swap furniture, decor and lighting to see how the details change the feel.",
-    tags: ["Furniture Swaps", "Decor Styling", "Lighting Moods", "Material Studies"],
+    Icon: IconDetails,
   },
   {
     key: "images",
     tab: "Perfect Your Images",
     title: "Make every image work harder.",
     body: "Clean up, enhance and correct perspective so every photo is presentation-ready.",
-    tags: ["Cleanup", "Enhancement", "Perspective Correction", "Upscaling"],
+    Icon: IconImages,
   },
 ] as const;
 
@@ -51,29 +52,50 @@ export default function WhatToTransform() {
           description="Start with the outcome you have in mind. Choose a direction and VastuNord gives you the tools to bring it to life."
         />
 
-        <Tabs
-          tabs={options.map((opt) => ({ key: opt.key, label: opt.tab }))}
-          active={active}
-          onChange={setActive}
-          className="mt-10"
-        />
-
-        <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <h3 className="text-2xl font-semibold text-stone-900">{current.title}</h3>
-            <p className="mt-3 text-stone-600">{current.body}</p>
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {current.tags.map((tag) => (
-                <li
-                  key={tag}
-                  className="rounded-full border border-stone-200 px-4 py-2 text-xs font-medium text-stone-600"
+        <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1fr)] lg:items-center lg:gap-20">
+          <div className="flex flex-col gap-2">
+            {options.map((opt) => {
+              const isActive = opt.key === active;
+              const Icon = opt.Icon;
+              return (
+                <button
+                  key={opt.key}
+                  type="button"
+                  aria-pressed={isActive}
+                  onClick={() => setActive(opt.key)}
+                  className={clsx(
+                    "flex items-start gap-4 rounded-2xl border p-4 text-left transition-colors",
+                    isActive
+                      ? "border-brand-navy bg-brand-navy"
+                      : "border-transparent hover:bg-stone-100"
+                  )}
                 >
-                  {tag}
-                </li>
-              ))}
-            </ul>
+                  <Icon
+                    className={clsx("mt-0.5 h-5 w-5 shrink-0", isActive ? "text-brand-orange" : "text-stone-400")}
+                  />
+                  <span>
+                    <span className={clsx("block text-sm font-semibold", isActive ? "text-white" : "text-stone-900")}>
+                      {opt.tab}
+                    </span>
+                    <span className={clsx("mt-0.5 block text-sm", isActive ? "text-white/70" : "text-stone-500")}>
+                      {opt.title}
+                    </span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
-          <Placeholder label={current.tab} className="aspect-[4/3]" />
+
+          <div>
+            <div className="relative">
+              <Placeholder label={current.tab} className="aspect-[4/3] w-full" />
+              <div className="absolute inset-x-4 bottom-4 rounded-xl bg-brand-navy/85 px-4 py-3 backdrop-blur">
+                <p className="text-sm font-medium text-white">{current.title}</p>
+              </div>
+            </div>
+            <p className="mt-4 text-stone-600">{current.body}</p>
+            <span className="mt-3 inline-block text-sm font-semibold text-brand-orange">Explore →</span>
+          </div>
         </div>
       </PageContainer>
     </Section>
