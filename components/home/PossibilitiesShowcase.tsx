@@ -1,27 +1,40 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import clsx from "clsx";
 import Tabs from "@/components/ui/Tabs";
-import Placeholder from "@/components/ui/Placeholder";
-import SectionHeader from "@/components/ui/SectionHeader";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
-import { IconChevron } from "@/components/ui/icons";
 
-const categories = [
+type Category = {
+  key: string;
+  label: string;
+  title: string;
+  description: string;
+  // Only "Spaces" has artwork in Figma; the other categories render the
+  // compare card without images until the content is supplied.
+  input?: string;
+  variations?: string[];
+};
+
+const categories: Category[] = [
   {
     key: "spaces",
     label: "Spaces",
-    eyebrow: "SPACES",
     title: "Room Reimagination",
     description:
       "Start with an existing room and explore multiple interior design directions from the same base image.",
+    input: "/images/possibilities/spaces-input.png",
+    variations: [
+      "/images/possibilities/spaces-variation-1.png",
+      "/images/possibilities/spaces-variation-2.png",
+      "/images/possibilities/spaces-variation-3.png",
+    ],
   },
   {
     key: "outdoors",
     label: "Outdoors",
-    eyebrow: "OUTDOORS",
     title: "Garden Reimagination",
     description:
       "Start with an existing garden or yard and explore multiple landscaping directions from the same base image.",
@@ -29,7 +42,6 @@ const categories = [
   {
     key: "details",
     label: "Details",
-    eyebrow: "DETAILS",
     title: "Material Study",
     description:
       "Start with an existing detail and explore multiple furniture, decor and lighting directions from the same base image.",
@@ -37,95 +49,165 @@ const categories = [
   {
     key: "images",
     label: "Images",
-    eyebrow: "IMAGES",
     title: "Image Enhancement",
     description:
       "Start with an existing photo and explore multiple cleanup and enhancement directions from the same base image.",
   },
-] as const;
+];
 
 const variationCount = 3;
+// Figma frames the divider at 52% (358.8px of 690px).
+const defaultSplit = 52;
 
 export default function PossibilitiesShowcase() {
-  const [active, setActive] = useState<(typeof categories)[number]["key"]>("spaces");
-  const [variation, setVariation] = useState(1);
+  const [active, setActive] = useState(categories[0].key);
+  const [variation, setVariation] = useState(0);
+  const [split, setSplit] = useState(defaultSplit);
   const current = categories.find((c) => c.key === active)!;
+  const variationSrc = current.variations?.[variation];
+
+  const selectVariation = (i: number) => setVariation(i);
+  const stepVariation = (delta: number) =>
+    setVariation((v) => (v + delta + variationCount) % variationCount);
 
   return (
-    <Section>
+    <Section padded={false} className="py-20 lg:py-28">
       <PageContainer>
-        <div className="flex flex-wrap items-start justify-between gap-6">
-          <SectionHeader
-            eyebrow="03 — Possibilities"
-            title="See what you can create."
-            description="Start with a real image and explore how it can transform — from interiors and exteriors to fine details, VastuNord generates multiple directions from a single starting point."
-          />
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-[768px]">
+            <p className="eyebrow text-stone-500">03 — Possibilities</p>
+            <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
+              See what you can create.
+            </h2>
+            <p className="mt-5 max-w-[576px] leading-7 text-stone-600">
+              Start with a real image and explore how it can transform — from interiors and exteriors
+              to fine details, VastuNord generates multiple directions from a single starting point.
+            </p>
+          </div>
           <Tabs
+            tone="outline"
             tabs={categories.map((c) => ({ key: c.key, label: c.label }))}
             active={active}
             onChange={(key) => {
               setActive(key);
-              setVariation(1);
+              setVariation(0);
+              setSplit(defaultSplit);
             }}
+            wrap={false}
+            className="-mx-6 px-6 md:mx-0 md:px-0"
           />
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[1.3fr_1fr]">
-          <div className="relative">
-            <Placeholder label="Input" className="aspect-[4/3] w-full" />
-            <span className="absolute left-4 top-4 rounded-full bg-white px-3 py-1 text-xs font-semibold uppercase tracking-widest text-brand-navy">
+        <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,3fr)] lg:items-center lg:gap-16">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-brand-cream shadow-[0_30px_80px_-50px_rgba(1,41,58,0.7)]">
+            {current.input && (
+              <Image
+                src={current.input}
+                alt="Input image"
+                fill
+                sizes="(min-width: 1024px) 690px, 100vw"
+                className="object-cover"
+              />
+            )}
+            {variationSrc && (
+              <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${split}%)` }}>
+                <Image
+                  src={variationSrc}
+                  alt={`Variation ${variation + 1} direction`}
+                  fill
+                  sizes="(min-width: 1024px) 690px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            )}
+
+            <span className="absolute left-4 top-4 rounded-full bg-white/85 px-3 py-1 text-[11px] font-semibold uppercase leading-[16.5px] tracking-[0.025em] text-stone-900">
               Input
             </span>
+            <span className="absolute right-4 top-4 rounded-full bg-brand-teal/85 px-3 py-1 text-[11px] font-semibold uppercase leading-[16.5px] tracking-[0.025em] text-white">
+              Variation {variation + 1}
+            </span>
+
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 w-px bg-white/90"
+              style={{ left: `${split}%` }}
+            />
+            <input
+              type="range"
+              min={0}
+              max={100}
+              value={split}
+              onChange={(e) => setSplit(Number(e.target.value))}
+              aria-label={`Compare Input with Variation ${variation + 1}`}
+              className="absolute inset-0 h-full w-full cursor-ew-resize appearance-none bg-transparent opacity-0"
+            />
           </div>
 
-          <div className="flex flex-col justify-between rounded-2xl border border-stone-200 p-6">
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-brand-orange">
-                {current.eyebrow}
-              </span>
-              <h3 className="mt-2 text-xl font-semibold text-stone-900">{current.title}</h3>
-              <p className="mt-2 text-sm text-stone-600">{current.description}</p>
-            </div>
+          <div>
+            <p className="eyebrow text-stone-400">{current.label}</p>
+            <h3 className="mt-3 text-2xl font-semibold leading-8 tracking-[-0.0135em] text-brand-teal">
+              {current.title}
+            </h3>
+            <p className="mt-4 text-sm leading-7 text-stone-600">{current.description}</p>
 
-            <div className="mt-6">
-              <div className="flex items-center justify-between text-sm font-medium text-stone-600">
+            <div className="mt-7 flex items-center gap-4">
+              <p className="shrink-0 text-sm font-medium leading-5 text-brand-teal">
+                {variation + 1} of {variationCount} Variations
+              </p>
+              <span aria-hidden className="h-px flex-1 bg-stone-200" />
+              <div className="flex gap-2">
                 <button
                   type="button"
                   aria-label="Previous variation"
-                  onClick={() => setVariation((v) => (v === 1 ? variationCount : v - 1))}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-stone-200 hover:bg-stone-100"
+                  onClick={() => stepVariation(-1)}
+                  className={variationNavButton}
                 >
-                  <IconChevron direction="left" className="h-4 w-4" />
+                  <Image src="/icons/arrow-left-navy.svg" alt="" width={16} height={16} />
                 </button>
-                <span>
-                  {variation} of {variationCount} Variations
-                </span>
                 <button
                   type="button"
                   aria-label="Next variation"
-                  onClick={() => setVariation((v) => (v === variationCount ? 1 : v + 1))}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-stone-200 hover:bg-stone-100"
+                  onClick={() => stepVariation(1)}
+                  className={variationNavButton}
                 >
-                  <IconChevron className="h-4 w-4" />
+                  <Image src="/icons/arrow-right-navy.svg" alt="" width={16} height={16} />
                 </button>
               </div>
-              <div className="mt-4 grid grid-cols-3 gap-2">
-                {Array.from({ length: variationCount }).map((_, i) => (
-                  <Placeholder
-                    key={i}
-                    label={`V${i + 1}`}
-                    className={clsx("aspect-square", variation === i + 1 && "ring-2 ring-brand-orange")}
-                  />
-                ))}
-              </div>
             </div>
+
+            <div className="mt-5 grid grid-cols-3 gap-2">
+              {Array.from({ length: variationCount }, (_, i) => {
+                const src = current.variations?.[i];
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    aria-label={`Show variation ${i + 1}`}
+                    aria-pressed={variation === i}
+                    onClick={() => selectVariation(i)}
+                    className={clsx(
+                      "overflow-hidden rounded-xl border bg-brand-cream",
+                      variation === i ? "border-brand-orange" : "border-stone-200 hover:border-stone-300"
+                    )}
+                  >
+                    <span className="relative block aspect-[4/3]">
+                      {src && (
+                        <Image src={src} alt="" fill sizes="(min-width: 1024px) 131px, 30vw" className="object-cover" />
+                      )}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <p className="mt-6 text-sm leading-5 text-stone-500">One real image. Multiple possible futures.</p>
           </div>
         </div>
-
-        <p className="mt-6 text-center text-sm text-stone-500">
-          One real image. Multiple possible futures.
-        </p>
       </PageContainer>
     </Section>
   );
 }
+
+const variationNavButton =
+  "flex size-9 items-center justify-center rounded-full border border-stone-200 hover:bg-stone-50";

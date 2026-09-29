@@ -14,7 +14,7 @@
 
   /* Typography — values that represent a repeated design decision rather
      than a one-off, so they don't get re-typed as arbitrary Tailwind values. */
-  --tracking-eyebrow: 0.2em;
+  --tracking-eyebrow: 0.22em; /* Figma: 2.42px at 11px */
 
   /* Motion */
   --transition-fast: 150ms;
@@ -30,7 +30,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-body);
+  --font-sans: var(--font-zt-nature);
   --font-heading: var(--font-heading);
 
   --color-brand-orange: var(--color-brand-orange);
@@ -57,7 +57,7 @@
   body {
     background: var(--background);
     color: var(--foreground);
-    font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-zt-nature), ui-sans-serif, system-ui, sans-serif;
   }
 
   h1,
@@ -132,10 +132,82 @@
 /* ---------------------------------------------------------------------- */
 @layer components {
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-eyebrow;
+    @apply text-[11px] leading-[1.5] font-semibold uppercase tracking-eyebrow;
   }
 
   .cta-group {
     @apply flex flex-wrap items-center gap-4;
   }
+
+  /* 1px orange rule that fades out at both ends — tops the dark sections. */
+  .accent-rule {
+    @apply absolute inset-x-0 top-0 h-px;
+    background-image: linear-gradient(
+      90deg,
+      rgba(251, 96, 43, 0) 0%,
+      rgba(251, 96, 43, 0.6) 20.673%,
+      #fb602b 50%,
+      rgba(251, 96, 43, 0.6) 77.885%,
+      rgba(251, 96, 43, 0) 100%
+    );
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Hero story card — one timeline drives the progress bar, the orange     */
+/* divider and the before→after reveal so they always stay in sync.       */
+/* ---------------------------------------------------------------------- */
+@layer components {
+  .story-fill,
+  .story-divider,
+  .story-reveal {
+    animation-duration: var(--story-duration, 7s);
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+  }
+
+  .story-fill {
+    animation-name: story-fill;
+  }
+
+  .story-divider {
+    animation-name: story-divider;
+  }
+
+  .story-reveal {
+    animation-name: story-reveal;
+  }
+
+  /* Without motion the card holds a static mid-point split and never auto-advances. */
+  @media (prefers-reduced-motion: reduce) {
+    .story-fill,
+    .story-divider,
+    .story-reveal {
+      animation: none;
+    }
+    .story-fill {
+      width: 50%;
+    }
+    .story-divider {
+      left: 50%;
+    }
+    .story-reveal {
+      clip-path: inset(0 50% 0 0);
+    }
+  }
+}
+
+@keyframes story-fill {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes story-divider {
+  from { left: 0%; }
+  to { left: 100%; }
+}
+
+@keyframes story-reveal {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0% 0 0); }
 }

@@ -1,11 +1,12 @@
 import clsx from "clsx";
 
-type Tone = "default" | "dark" | "cream";
+type Tone = "default" | "dark" | "cream" | "offwhite";
 
 const toneStyles: Record<Tone, string> = {
   default: "",
   dark: "bg-brand-navy text-white",
   cream: "bg-brand-cream",
+  offwhite: "bg-brand-offwhite",
 };
 
 export default function Section({

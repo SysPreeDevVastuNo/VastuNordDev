@@ -1,28 +1,34 @@
-import Eyebrow from "@/components/ui/Eyebrow";
-import Placeholder from "@/components/ui/Placeholder";
+import Image from "next/image";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
 
 export default function OurBelief() {
   return (
-    <Section>
-      <PageContainer size="narrow" className="text-center">
-        <Eyebrow>Our Belief</Eyebrow>
-        <h2 className="mx-auto mt-3 max-w-xl text-3xl font-semibold text-brand-teal sm:text-4xl">
-          Design shouldn&rsquo;t feel like a leap of faith.
-        </h2>
-        <p className="mx-auto mt-5 max-w-xl text-stone-600">
-          Too many decisions are made without seeing the outcome. VastuNord closes the gap between
-          imagining something and actually seeing it.
-        </p>
-
-        <div className="relative mt-10 overflow-hidden rounded-2xl">
-          <Placeholder label="Our Belief" className="aspect-[16/9] w-full" />
-          <div className="absolute inset-0 bg-brand-navy/50" />
-          <p className="absolute inset-0 flex items-center justify-center px-10 text-center text-lg font-medium text-white">
-            A world where you can see the possibility before you commit to it.
+    <Section padded={false} className="py-24 lg:py-36">
+      <PageContainer className="text-center">
+        <div className="mx-auto max-w-[768px]">
+          <p className="eyebrow text-stone-500">Our Belief</p>
+          <h2 className="mt-5 text-[32px] font-semibold leading-[1.06] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[56px]">
+            Design shouldn&rsquo;t feel like a leap of faith.
+          </h2>
+          <p className="mx-auto mt-6 max-w-[576px] leading-7 text-stone-600">
+            Too many decisions are made without seeing the outcome. VastuNord closes the gap between
+            imagining something and actually seeing it.
           </p>
         </div>
+
+        {/* Figma reuses the Home closing-banner photo here. */}
+        <figure className="mx-auto mt-14 max-w-[896px] overflow-hidden rounded-3xl border border-stone-200">
+          <div className="relative aspect-[7/3]">
+            <Image src="/images/cta/home.jpg" alt="" fill sizes="(min-width: 1024px) 896px, 100vw" className="object-cover" />
+            <div aria-hidden className="absolute inset-0 bg-brand-navy/45" />
+            <figcaption className="absolute inset-0 flex items-center justify-center px-8">
+              <p className="max-w-[672px] font-heading text-[21.6px] font-medium leading-[1.25] text-white lg:text-[32px]">
+                A world where you can see the possibility before you commit to it.
+              </p>
+            </figcaption>
+          </div>
+        </figure>
       </PageContainer>
     </Section>
   );

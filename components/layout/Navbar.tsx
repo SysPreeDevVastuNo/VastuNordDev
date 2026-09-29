@@ -1,7 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+import clsx from "clsx";
 
 const links = [
   { href: "/features", label: "Features" },
@@ -13,59 +16,83 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  // Figma marks the current page's link in teal (e.g. "Pricing" on /pricing).
+  const isCurrent = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-stone-100 bg-white/90 backdrop-blur">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 md:px-10 lg:px-14">
-        <Link href="/" aria-label="VastuNord home" className="font-heading text-lg font-semibold text-brand-navy">
-          VastuNord
+    <header className="sticky top-0 z-50 border-b border-transparent bg-white">
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 xl:h-20 xl:max-w-none xl:px-14">
+        <Link href="/" aria-label="VastuNord home" className="shrink-0">
+          <Image
+            src="/brand/vastunord-logo.svg"
+            alt=""
+            width={260}
+            height={24}
+            priority
+            className="h-5 w-auto xl:h-6"
+          />
         </Link>
 
-        <ul className="hidden items-center gap-8 text-sm font-medium text-stone-700 md:flex">
+        <ul className="hidden items-center gap-1 xl:flex">
           {links.map((link) => (
             <li key={link.href}>
-              <Link href={link.href} className="transition-colors hover:text-brand-navy">
+              <Link
+                href={link.href}
+                aria-current={isCurrent(link.href) ? "page" : undefined}
+                className={clsx(
+                  "relative block rounded-full px-4 py-2 text-sm leading-5 hover:text-brand-navy",
+                  isCurrent(link.href) ? "text-brand-teal" : "text-stone-600"
+                )}
+              >
                 {link.label}
+                <span aria-hidden className="absolute inset-x-4 top-[37px] h-px bg-brand-orange" />
               </Link>
             </li>
           ))}
         </ul>
 
-        <div className="hidden items-center gap-4 md:flex">
-          <Link href="/contact" className="text-sm font-medium text-stone-700 transition-colors hover:text-brand-navy">
+        <div className="hidden items-center gap-3 xl:flex">
+          <Link href="/contact" className="text-sm leading-5 text-stone-600 hover:text-brand-navy">
             Sign In
           </Link>
           <Link
             href="/pricing"
-            className="rounded-2xl bg-brand-orange px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-orange-dark"
+            className="flex items-center justify-center gap-2 rounded-2xl bg-brand-orange px-5 py-3 text-sm font-semibold leading-5 text-white hover:bg-brand-orange-dark"
           >
+            <Image src="/icons/sparkle.svg" alt="" width={16} height={16} />
             Visualize My Space
           </Link>
         </div>
 
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center rounded-lg text-stone-700 md:hidden"
-          aria-label="Toggle menu"
+          className="-mr-2 flex size-10 items-center justify-center rounded-full xl:hidden"
+          aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            {open ? (
-              <path d="M6 6l12 12M18 6l-12 12" strokeLinecap="round" />
-            ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
-            )}
-          </svg>
+          {open ? (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1C1917" strokeWidth="1.25" strokeLinecap="round">
+              <path d="M4.5 4.5l11 11M15.5 4.5l-11 11" />
+            </svg>
+          ) : (
+            <Image src="/icons/menu.svg" alt="" width={20} height={20} />
+          )}
         </button>
       </nav>
 
       {open && (
-        <div className="border-t border-stone-100 bg-white px-6 py-4 md:hidden">
-          <ul className="flex flex-col gap-4 text-sm font-medium text-stone-700">
+        <div className="border-t border-stone-100 bg-white px-6 py-4 xl:hidden">
+          <ul className="flex flex-col gap-4 text-sm leading-5 text-stone-600">
             {links.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} onClick={() => setOpen(false)}>
+                <Link
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  aria-current={isCurrent(link.href) ? "page" : undefined}
+                  className={clsx(isCurrent(link.href) && "text-brand-teal")}
+                >
                   {link.label}
                 </Link>
               </li>
@@ -79,8 +106,9 @@ export default function Navbar() {
           <Link
             href="/pricing"
             onClick={() => setOpen(false)}
-            className="mt-4 block rounded-2xl bg-brand-orange px-5 py-3 text-center text-sm font-semibold text-white"
+            className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-brand-orange px-5 py-3 text-sm font-semibold leading-5 text-white"
           >
+            <Image src="/icons/sparkle.svg" alt="" width={16} height={16} />
             Visualize My Space
           </Link>
         </div>

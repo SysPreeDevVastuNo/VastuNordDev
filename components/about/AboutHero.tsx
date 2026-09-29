@@ -1,39 +1,51 @@
-import Eyebrow from "@/components/ui/Eyebrow";
+import Image from "next/image";
 import Button from "@/components/ui/Button";
-import Placeholder from "@/components/ui/Placeholder";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import StoryCard from "@/components/shared/StoryCard";
 
 export default function AboutHero() {
   return (
-    <Section tone="dark" padded={false}>
-      <PageContainer className="grid grid-cols-1 items-center gap-10 py-16 lg:grid-cols-2 lg:py-20">
-        <div>
-          <Eyebrow light>Why VastuNord</Eyebrow>
-          <h1 className="mt-4 text-4xl font-semibold leading-tight sm:text-5xl">
-            You shouldn&rsquo;t have to imagine it all in your head.
-          </h1>
-          <p className="mt-6 max-w-md text-white/70">
-            Whether you&rsquo;re changing a room, planning a garden, or exploring a new idea — the
-            hardest part is knowing what it will actually look like. VastuNord helps you see it
-            before you commit.
-          </p>
-          <div className="cta-group mt-8">
-            <Button href="/pricing">Start Creating</Button>
-            <Button href="#examples" variant="ghost">
-              See Examples
-            </Button>
-          </div>
-        </div>
+    <Section tone="dark" padded={false} className="relative isolate overflow-hidden">
+      <Image
+        src="/images/shared/unfurnished-open-plan.jpg"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="-z-10 object-cover opacity-20"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-linear-to-b from-brand-navy/75 via-brand-navy/80 to-brand-navy"
+      />
+      <div aria-hidden className="accent-rule" />
 
-        <div className="relative">
-          <Placeholder label="Interior Transformation" className="aspect-[4/5] w-full" />
-          <div className="absolute inset-x-4 bottom-4 rounded-xl bg-brand-navy/85 px-4 py-3 backdrop-blur">
-            <span className="block text-xs font-semibold uppercase tracking-widest text-white/50">
-              Interior Transformation
-            </span>
-            <p className="text-sm font-medium text-white">Reimagine interior spaces instantly.</p>
+      <PageContainer className="pt-28 pb-20 lg:pt-36">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,581.05fr)_minmax(0,522.94fr)] lg:gap-16">
+          <div>
+            <p className="eyebrow text-white/70">Why VastuNord</p>
+            <h1 className="mt-6 text-[35.2px] font-semibold leading-[1.02] tracking-[-0.0135em] text-white sm:text-[52px] xl:text-[72px]">
+              You shouldn&rsquo;t have to imagine it all in your head.
+            </h1>
+            <p className="mt-6 max-w-[512px] leading-7 text-brand-cream/75 lg:text-lg">
+              Whether you&rsquo;re changing a room, planning a garden, or exploring a new idea — the
+              hardest part is knowing what it will actually look like. VastuNord helps you see it before
+              you commit.
+            </p>
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Button href="/pricing" className="w-full sm:w-auto">
+                <Image src="/icons/sparkle.svg" alt="" width={16} height={16} />
+                Start Creating
+              </Button>
+              <Button href="/features#possibilities" variant="ghost" className="w-full sm:w-auto">
+                <Image src="/icons/eye-white.svg" alt="" width={16} height={16} />
+                See Examples
+              </Button>
+            </div>
           </div>
+
+          <StoryCard />
         </div>
       </PageContainer>
     </Section>

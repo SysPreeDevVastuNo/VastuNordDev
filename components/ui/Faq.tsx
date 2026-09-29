@@ -1,13 +1,39 @@
 "use client";
 
 import { useState } from "react";
-import { IconChevron } from "@/components/ui/icons";
+import Image from "next/image";
+import clsx from "clsx";
 
-export default function Faq({ items }: { items: { q: string; a: string }[] }) {
+export type FaqVariant = "chevron" | "plus";
+
+// Figma uses two accordion treatments:
+//  - chevron: Home / Pricing — 18px questions, 24px rows, grey chevron that flips.
+//  - plus:    Features       — 16px questions, 20px rows, orange + that turns into ×.
+const variants: Record<FaqVariant, { row: string; question: string; answer: string }> = {
+  chevron: {
+    row: "py-6",
+    question: "lg:text-lg lg:leading-7",
+    answer: "pb-6",
+  },
+  plus: {
+    row: "py-5",
+    question: "",
+    answer: "max-w-[672px] pb-5",
+  },
+};
+
+export default function Faq({
+  items,
+  variant = "chevron",
+}: {
+  items: { q: string; a: string }[];
+  variant?: FaqVariant;
+}) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const v = variants[variant];
 
   return (
-    <div className="divide-y divide-stone-200 border-t border-b border-stone-200">
+    <div className="divide-y divide-stone-200 border-y border-stone-200">
       {items.map((item, i) => {
         const isOpen = openIndex === i;
         return (
@@ -15,16 +41,40 @@ export default function Faq({ items }: { items: { q: string; a: string }[] }) {
             <button
               type="button"
               onClick={() => setOpenIndex(isOpen ? null : i)}
-              className="flex w-full items-center justify-between gap-4 py-5 text-left"
+              className={clsx("flex w-full items-center justify-between gap-6 text-left", v.row)}
               aria-expanded={isOpen}
             >
-              <span className="font-medium text-stone-900">{item.q}</span>
-              <IconChevron
-                direction={isOpen ? "down" : "right"}
-                className="h-4 w-4 shrink-0 text-stone-400 transition-transform"
-              />
+              <span className={clsx("font-heading font-medium leading-6 text-brand-teal", v.question)}>
+                {item.q}
+              </span>
+              {variant === "chevron" ? (
+                <Image
+                  src="/icons/chevron-down.svg"
+                  alt=""
+                  width={18}
+                  height={18}
+                  className={clsx("shrink-0 transition-transform duration-300", isOpen && "rotate-180")}
+                />
+              ) : (
+                <Image
+                  src="/icons/plus-orange.svg"
+                  alt=""
+                  width={16}
+                  height={16}
+                  className={clsx("shrink-0 transition-transform duration-300", isOpen && "rotate-45")}
+                />
+              )}
             </button>
-            {isOpen && <p className="pb-5 text-sm leading-relaxed text-stone-600">{item.a}</p>}
+            <div
+              className={clsx(
+                "grid transition-[grid-template-rows] duration-300 ease-out",
+                isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+              )}
+            >
+              <div className="overflow-hidden">
+                <p className={clsx("text-[15px] leading-7 text-stone-600", v.answer)}>{item.a}</p>
+              </div>
+            </div>
           </div>
         );
       })}
