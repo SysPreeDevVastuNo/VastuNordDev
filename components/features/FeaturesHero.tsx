@@ -3,6 +3,7 @@ import Button from "@/components/ui/Button";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
 import StoryCard from "@/components/shared/StoryCard";
+import Reveal from "@/components/ui/Reveal";
 
 export default function FeaturesHero() {
   return (
@@ -30,7 +31,7 @@ export default function FeaturesHero() {
           uses the standard padded container with fluid columns. */}
       <PageContainer className="pt-24 pb-14 lg:pt-28 lg:pb-24 min-[87rem]:px-0">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.76fr)] lg:gap-16 min-[87rem]:grid-cols-[688px_522.94px]">
-          <div className="max-w-[576px]">
+          <Reveal className="max-w-[576px]">
             <p className="flex h-6 items-center gap-2 text-[11px] font-semibold uppercase leading-[16.5px] tracking-eyebrow text-brand-orange">
               <Image src="/icons/interior-spaces.svg" alt="" width={14} height={14} />
               Interior Spaces
@@ -53,9 +54,11 @@ export default function FeaturesHero() {
                 Explore possibilities
               </Button>
             </div>
-          </div>
+          </Reveal>
 
-          <StoryCard />
+          <Reveal delay={120}>
+            <StoryCard />
+          </Reveal>
         </div>
       </PageContainer>
     </Section>

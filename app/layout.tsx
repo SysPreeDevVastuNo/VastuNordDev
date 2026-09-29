@@ -43,6 +43,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${ztNature.variable} ${headingFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-stone-900">
+        {/* Scroll-reveal blocks rely on JS to appear; show them outright without it. */}
+        <noscript>
+          <style>{`.reveal{opacity:1;transform:none}`}</style>
+        </noscript>
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

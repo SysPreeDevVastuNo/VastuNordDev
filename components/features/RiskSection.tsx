@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 function DownArrow() {
   return (
@@ -15,7 +16,7 @@ export default function RiskSection() {
     <Section padded={false} className="py-20 lg:py-28">
       <PageContainer>
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-[608fr_480fr] lg:items-center lg:gap-20 [&>*]:min-w-0">
-          <div>
+          <Reveal>
             <p className="eyebrow text-stone-500">The Decision Problem</p>
             <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
               Why living room renovations feel risky
@@ -26,9 +27,9 @@ export default function RiskSection() {
               that gap is where expensive second-guessing lives. You commit to a sofa, a palette,
               a whole direction on faith, then wait to find out if it was right.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="rounded-3xl border border-stone-200 bg-brand-offwhite p-6 lg:p-8">
+          <Reveal delay={80} className="rounded-3xl border border-stone-200 bg-brand-offwhite p-6 lg:p-8">
             <div className="flex h-[54px] items-center justify-center rounded-xl border border-brand-teal/20 bg-white px-4">
               <p className="text-sm font-medium leading-5 text-brand-teal">Your room today</p>
             </div>
@@ -51,7 +52,7 @@ export default function RiskSection() {
             <p className="pt-3 text-center text-xs font-medium uppercase leading-4 tracking-[0.18em] text-stone-500">
               Several possible rooms
             </p>
-          </div>
+          </Reveal>
         </div>
       </PageContainer>
     </Section>

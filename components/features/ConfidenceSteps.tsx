@@ -1,5 +1,6 @@
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const steps = [
   {
@@ -32,14 +33,14 @@ export default function ConfidenceSteps() {
   return (
     <Section padded={false} className="py-20 lg:py-28">
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">How It Works</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
             From uncertainty to confidence in minutes
           </h2>
-        </div>
+        </Reveal>
 
-        <ol className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <Reveal as="ol" delay={80} className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
           {steps.map((s) => (
             <li key={s.n} className="rounded-3xl border border-stone-200 bg-brand-offwhite p-7">
               <p aria-hidden className="font-heading text-[30px] font-semibold leading-9 text-brand-orange/90">
@@ -54,7 +55,7 @@ export default function ConfidenceSteps() {
               <p className="pt-3 text-sm leading-6 text-stone-600">{s.body}</p>
             </li>
           ))}
-        </ol>
+        </Reveal>
       </PageContainer>
     </Section>
   );

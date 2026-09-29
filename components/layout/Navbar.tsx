@@ -22,7 +22,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-transparent bg-white">
-      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 xl:h-20 xl:max-w-none xl:px-14">
+      <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-8 px-6 md:px-10 lg:px-14 xl:h-20">
         <Link href="/" aria-label="VastuNord home" className="shrink-0">
           <Image
             src="/brand/vastunord-logo.svg"
@@ -46,7 +46,14 @@ export default function Navbar() {
                 )}
               >
                 {link.label}
-                <span aria-hidden className="absolute inset-x-4 top-[37px] h-px bg-brand-orange" />
+                {/* Only the current page's link shows the underline. */}
+                <span
+                  aria-hidden
+                  className={clsx(
+                    "absolute inset-x-4 top-[37px] h-px bg-brand-orange transition-transform duration-200 ease-[cubic-bezier(0.22,0.61,0.36,1)]",
+                    isCurrent(link.href) ? "scale-x-100" : "scale-x-0"
+                  )}
+                />
               </Link>
             </li>
           ))}
@@ -91,7 +98,7 @@ export default function Navbar() {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   aria-current={isCurrent(link.href) ? "page" : undefined}
-                  className={clsx(isCurrent(link.href) && "text-brand-teal")}
+                  className={clsx(isCurrent(link.href) && "text-brand-orange")}
                 >
                   {link.label}
                 </Link>

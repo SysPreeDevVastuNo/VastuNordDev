@@ -6,14 +6,13 @@ import clsx from "clsx";
 import Tabs from "@/components/ui/Tabs";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 type Category = {
   key: string;
   label: string;
   title: string;
   description: string;
-  // Only "Spaces" has artwork in Figma; the other categories render the
-  // compare card without images until the content is supplied.
   input?: string;
   variations?: string[];
 };
@@ -38,6 +37,12 @@ const categories: Category[] = [
     title: "Garden Reimagination",
     description:
       "Start with an existing garden or yard and explore multiple landscaping directions from the same base image.",
+    input: "/images/possibilities/outdoors-input.jpg",
+    variations: [
+      "/images/possibilities/outdoors-variation-1.jpg",
+      "/images/possibilities/outdoors-variation-2.jpg",
+      "/images/possibilities/outdoors-variation-3.jpg",
+    ],
   },
   {
     key: "details",
@@ -45,6 +50,12 @@ const categories: Category[] = [
     title: "Material Study",
     description:
       "Start with an existing detail and explore multiple furniture, decor and lighting directions from the same base image.",
+    input: "/images/possibilities/details-input.jpg",
+    variations: [
+      "/images/possibilities/details-variation-1.jpg",
+      "/images/possibilities/details-variation-2.jpg",
+      "/images/possibilities/details-variation-3.jpg",
+    ],
   },
   {
     key: "images",
@@ -52,6 +63,12 @@ const categories: Category[] = [
     title: "Image Enhancement",
     description:
       "Start with an existing photo and explore multiple cleanup and enhancement directions from the same base image.",
+    input: "/images/possibilities/images-input.jpg",
+    variations: [
+      "/images/possibilities/images-variation-1.jpg",
+      "/images/possibilities/images-variation-2.jpg",
+      "/images/possibilities/images-variation-3.jpg",
+    ],
   },
 ];
 
@@ -74,7 +91,7 @@ export default function PossibilitiesShowcase() {
     <Section padded={false} className="py-20 lg:py-28">
       <PageContainer>
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-[768px]">
+          <Reveal className="max-w-[768px]">
             <p className="eyebrow text-stone-500">03 — Possibilities</p>
             <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
               See what you can create.
@@ -83,7 +100,8 @@ export default function PossibilitiesShowcase() {
               Start with a real image and explore how it can transform — from interiors and exteriors
               to fine details, VastuNord generates multiple directions from a single starting point.
             </p>
-          </div>
+          </Reveal>
+          <Reveal delay={80} className="min-w-0">
           <Tabs
             tone="outline"
             tabs={categories.map((c) => ({ key: c.key, label: c.label }))}
@@ -96,10 +114,11 @@ export default function PossibilitiesShowcase() {
             wrap={false}
             className="-mx-6 px-6 md:mx-0 md:px-0"
           />
+          </Reveal>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,3fr)] lg:items-center lg:gap-16">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-brand-cream shadow-[0_30px_80px_-50px_rgba(1,41,58,0.7)]">
+          <Reveal className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-brand-cream shadow-[0_30px_80px_-50px_rgba(1,41,58,0.7)]">
             {current.input && (
               <Image
                 src={current.input}
@@ -142,9 +161,9 @@ export default function PossibilitiesShowcase() {
               aria-label={`Compare Input with Variation ${variation + 1}`}
               className="absolute inset-0 h-full w-full cursor-ew-resize appearance-none bg-transparent opacity-0"
             />
-          </div>
+          </Reveal>
 
-          <div>
+          <Reveal delay={60}>
             <p className="eyebrow text-stone-400">{current.label}</p>
             <h3 className="mt-3 text-2xl font-semibold leading-8 tracking-[-0.0135em] text-brand-teal">
               {current.title}
@@ -202,7 +221,7 @@ export default function PossibilitiesShowcase() {
             </div>
 
             <p className="mt-6 text-sm leading-5 text-stone-500">One real image. Multiple possible futures.</p>
-          </div>
+          </Reveal>
         </div>
       </PageContainer>
     </Section>

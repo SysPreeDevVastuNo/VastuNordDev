@@ -22,7 +22,7 @@ const toneStyles: Record<Tone, { list: string; tab: string; active: string; inac
     list: "gap-2",
     tab: "border px-4 py-2 text-[13px] leading-[19.5px]",
     active: "border-brand-teal bg-brand-teal text-white",
-    inactive: "border-stone-200 bg-white text-stone-600 hover:bg-stone-50",
+    inactive: "border-stone-200 bg-white text-stone-600 hover:border-brand-teal/40 hover:text-brand-teal",
   },
 };
 
@@ -55,7 +55,7 @@ export default function Tabs<K extends string>({
             aria-selected={isActive}
             onClick={() => onChange(tab.key)}
             className={clsx(
-              "shrink-0 rounded-full transition-colors",
+              "shrink-0 rounded-full transition-[background-color,border-color,color]",
               styles.tab,
               isActive ? styles.active : styles.inactive
             )}

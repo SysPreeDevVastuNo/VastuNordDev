@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const items = [
   {
@@ -39,16 +40,16 @@ export default function WhyVastuNord() {
   return (
     <Section tone="cream" padded={false} className="py-20 lg:py-28">
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">Why VastuNord</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
             Why use VastuNord?
           </h2>
-        </div>
+        </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {items.map(({ title, body, icon }) => (
-            <div key={title} className="rounded-3xl border border-stone-200 bg-white p-7">
+          {items.map(({ title, body, icon }, i) => (
+            <Reveal key={title} delay={i * 50} className="rounded-3xl border border-stone-200 bg-white p-7">
               <span className="flex size-11 items-center justify-center rounded-2xl bg-brand-orange/10">
                 <Image src={icon} alt="" width={22} height={22} />
               </span>
@@ -56,7 +57,7 @@ export default function WhyVastuNord() {
                 {title}
               </h3>
               <p className="pt-3 text-sm leading-6 text-stone-600">{body}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </PageContainer>

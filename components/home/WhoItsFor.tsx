@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const audiences = [
   {
@@ -25,17 +26,17 @@ export default function WhoItsFor() {
   return (
     <Section tone="cream" padded={false} className="py-20 lg:py-28">
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">05 — Who It&apos;s For</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
             Built for people who need to see an idea before moving forward.
           </h2>
-        </div>
+        </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3">
-          {audiences.map((a) => (
+          {audiences.map((a, i) => (
+            <Reveal key={a.title} delay={i * 70}>
             <Link
-              key={a.title}
               href="/features"
               className="group relative block h-[322px] overflow-hidden rounded-3xl border border-stone-200"
             >
@@ -44,7 +45,7 @@ export default function WhoItsFor() {
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 376px, 100vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                className="object-cover transition-transform group-hover:scale-[1.03]"
               />
               <div aria-hidden className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-black/0" />
               <div className="absolute inset-x-0 bottom-0 p-7">
@@ -64,6 +65,7 @@ export default function WhoItsFor() {
                 </p>
               </div>
             </Link>
+            </Reveal>
           ))}
         </div>
       </PageContainer>

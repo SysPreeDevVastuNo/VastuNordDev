@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const routes = [
   {
@@ -33,22 +34,22 @@ export default function HelpRouting() {
   return (
     <Section padded={false} className="py-20 lg:py-28">
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">02 — How Can We Help?</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
             Pick the right door.
           </h2>
-        </div>
+        </Reveal>
         <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-stone-200 bg-stone-200 md:grid-cols-2">
-          {routes.map((route) => (
-            <div key={route.title} className="bg-white p-8">
+          {routes.map((route, i) => (
+            <Reveal key={route.title} delay={i * 55} className="bg-white p-8">
               <Image src={`/icons/help/${route.icon}.svg`} alt="" width={24} height={24} />
               <h3 className="pt-5 font-heading text-lg font-medium leading-7 tracking-[-0.0135em] text-brand-teal">
                 {route.title}
               </h3>
               <p className="max-w-[384px] pt-3 text-sm leading-6 text-stone-600">{route.body}</p>
               <p className="pt-6 text-xs uppercase leading-4 tracking-[0.025em] text-stone-500">{route.sla}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </PageContainer>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const possibilities = [
   "/images/problem/possibility-1.png",
@@ -15,7 +16,7 @@ export default function TheProblem() {
     <Section padded={false} className="py-20 lg:py-28">
       <PageContainer>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
-          <div>
+          <Reveal>
             <Eyebrow>01 — The Problem</Eyebrow>
             <h2 className="mt-5 text-[30.4px] font-semibold leading-[1.06] tracking-[-0.0135em] sm:text-[44px] xl:text-[56px]">
               <span className="block text-brand-teal">The hardest part isn&rsquo;t creating.</span>
@@ -29,9 +30,9 @@ export default function TheProblem() {
             <p className="mt-8 text-sm leading-5 text-stone-500">
               Start with what you have. Explore what it could become.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="grid grid-cols-[minmax(0,185.47fr)_22px_minmax(0,288.53fr)] items-center gap-4 lg:gap-6">
+          <Reveal delay={100} className="grid grid-cols-[minmax(0,185.47fr)_22px_minmax(0,288.53fr)] items-center gap-4 lg:gap-6">
             <figure>
               <div className="overflow-hidden rounded-3xl border border-stone-200">
                 <div className="relative aspect-[3/4]">
@@ -67,7 +68,7 @@ export default function TheProblem() {
               </div>
               <p className="eyebrow mt-3 text-brand-orange">Possibilities</p>
             </div>
-          </div>
+          </Reveal>
         </div>
       </PageContainer>
     </Section>

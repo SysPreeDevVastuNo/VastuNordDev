@@ -8,6 +8,7 @@ import Textarea from "@/components/ui/Textarea";
 import Select from "@/components/ui/Select";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const subjects = ["Product Support", "Sales", "Partnerships", "Feedback"] as const;
 
@@ -53,7 +54,7 @@ export default function ContactForm() {
     <Section id="contact-form" tone="offwhite" padded={false} className="border-y border-stone-200 py-20 lg:py-28">
       <PageContainer>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[484fr_604fr] lg:gap-20 [&>*]:min-w-0">
-          <div>
+          <Reveal>
             <p className="eyebrow text-stone-500">03 — Send Us a Message</p>
             <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
               Tell us about the decision.
@@ -61,12 +62,13 @@ export default function ContactForm() {
             <p className="max-w-[576px] pt-5 leading-7 text-stone-600">
               A photograph, a deadline, or a rough idea is enough to get a useful answer.
             </p>
-          </div>
+          </Reveal>
 
+          <Reveal delay={70} className="self-start">
           <form
             noValidate
             onSubmit={handleSubmit}
-            className="space-y-5 self-start rounded-3xl border border-stone-200 bg-white p-7 lg:p-9"
+            className="space-y-5 rounded-3xl border border-stone-200 bg-white p-7 lg:p-9"
           >
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <Input
@@ -105,7 +107,7 @@ export default function ContactForm() {
             <div className="flex flex-wrap items-center gap-4 pt-[15px]">
               <button
                 type="submit"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-orange px-5 py-3 text-sm font-semibold leading-5 text-white transition-colors hover:bg-brand-orange-dark"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-brand-orange px-5 py-3 text-sm font-semibold leading-5 text-white transition-[transform,background-color,border-color,color] active:translate-y-px hover:bg-brand-orange-dark"
               >
                 <Image src="/icons/send.svg" alt="" width={16} height={16} />
                 Send Message
@@ -115,6 +117,7 @@ export default function ContactForm() {
               </p>
             </div>
           </form>
+          </Reveal>
         </div>
       </PageContainer>
     </Section>

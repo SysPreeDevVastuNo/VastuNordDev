@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const featured = {
   category: "Renovation",
@@ -46,15 +47,15 @@ export default function FeaturedArticles() {
   return (
     <Section padded={false} className="py-20 lg:py-28">
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">02 — Featured</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
             Start with these.
           </h2>
-        </div>
+        </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-[614fr_534fr] lg:items-start [&>*]:min-w-0">
-          <article className="flex flex-col overflow-hidden rounded-3xl border border-stone-200 lg:h-[686px]">
+          <Reveal as="article" className="flex flex-col overflow-hidden rounded-3xl border border-stone-200 lg:h-[686px]">
             <div className="relative h-72 shrink-0 lg:h-96">
               <Image src={featured.image} alt="" fill sizes="(min-width: 1024px) 614px, 100vw" className="object-cover" />
             </div>
@@ -72,11 +73,11 @@ export default function FeaturedArticles() {
                 <Image src="/icons/arrow-up-right-orange.svg" alt="" width={14} height={14} />
               </a>
             </div>
-          </article>
+          </Reveal>
 
           <div className="flex flex-col gap-4">
-            {articles.map((a) => (
-              <article key={a.title} className="flex items-start gap-5 rounded-3xl border border-stone-200 bg-white p-4">
+            {articles.map((a, i) => (
+              <Reveal as="article" key={a.title} delay={i * 60} className="flex items-start gap-5 rounded-3xl border border-stone-200 bg-white p-4">
                 <div className="relative size-24 shrink-0 overflow-hidden rounded-xl lg:size-28">
                   <Image src={a.image} alt="" fill sizes="112px" className="object-cover" />
                 </div>
@@ -91,7 +92,7 @@ export default function FeaturedArticles() {
                   </h3>
                   <p className="line-clamp-2 pt-2 text-sm leading-6 text-stone-600">{a.body}</p>
                 </div>
-              </article>
+              </Reveal>
             ))}
           </div>
         </div>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const solutions = [
   {
@@ -34,16 +35,16 @@ export default function RelatedSolutions() {
   return (
     <Section padded={false} className="pb-20 lg:pb-28">
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">Related Solutions</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
             Explore related solutions
           </h2>
-        </div>
+        </Reveal>
 
         {/* Figma lets the row run past the container edge (card 4 is cut off) and
             scroll sideways; there are no arrow controls. */}
-        <div className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <Reveal delay={80} className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {solutions.map((s) => (
             <Link
               key={s.title}
@@ -56,7 +57,7 @@ export default function RelatedSolutions() {
                   alt=""
                   fill
                   sizes="(min-width: 768px) 350px, 72vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="object-cover transition-transform group-hover:scale-[1.03]"
                 />
                 <div aria-hidden className="absolute inset-0 bg-linear-to-t from-black/60 to-black/0" />
                 <span className="absolute bottom-3 left-3 flex h-[24.5px] items-center gap-1.5 rounded-full bg-white/85 px-3 text-[11px] font-semibold leading-[16.5px] text-brand-teal">
@@ -76,7 +77,7 @@ export default function RelatedSolutions() {
               </div>
             </Link>
           ))}
-        </div>
+        </Reveal>
       </PageContainer>
     </Section>
   );

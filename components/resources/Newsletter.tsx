@@ -6,6 +6,7 @@ import { z } from "zod";
 import clsx from "clsx";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const schema = z.object({
   email: z.email("Enter a valid email address."),
@@ -31,7 +32,7 @@ export default function Newsletter() {
   return (
     <Section padded={false} className="py-20 lg:py-24">
       <PageContainer>
-        <div className="grid grid-cols-1 gap-8 rounded-3xl border border-stone-200 bg-brand-cream p-8 lg:grid-cols-[546fr_492fr] lg:items-center lg:p-12 [&>*]:min-w-0">
+        <Reveal className="grid grid-cols-1 gap-8 rounded-3xl border border-stone-200 bg-brand-cream p-8 lg:grid-cols-[546fr_492fr] lg:items-center lg:p-12 [&>*]:min-w-0">
           <div>
             <p className="eyebrow text-stone-500">04 — Stay Updated</p>
             <h2 className="mt-4 text-[25.6px] font-semibold leading-[1.25] tracking-[-0.0135em] text-brand-teal lg:text-[36px]">
@@ -65,7 +66,7 @@ export default function Newsletter() {
               </label>
               <button
                 type="submit"
-                className="rounded-2xl bg-brand-orange px-5 py-3 text-sm font-semibold leading-5 text-white transition-colors hover:bg-brand-orange-dark"
+                className="rounded-2xl bg-brand-orange px-5 py-3 text-sm font-semibold leading-5 text-white transition-[transform,background-color,border-color,color] active:translate-y-px hover:bg-brand-orange-dark"
               >
                 Subscribe
               </button>
@@ -75,7 +76,7 @@ export default function Newsletter() {
               {status.kind === "success" && <span className="mt-2 block text-brand-teal">You&apos;re on the list.</span>}
             </p>
           </form>
-        </div>
+        </Reveal>
       </PageContainer>
     </Section>
   );

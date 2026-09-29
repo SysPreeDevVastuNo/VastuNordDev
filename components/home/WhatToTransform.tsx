@@ -7,6 +7,7 @@ import Button from "@/components/ui/Button";
 import MaskIcon from "@/components/ui/MaskIcon";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 type Option = {
   key: string;
@@ -15,8 +16,6 @@ type Option = {
   icon: string;
   body: string;
   cta: string;
-  // Only "Reimagine Spaces" has artwork and tags in Figma; the other three
-  // render without them until the content is supplied.
   image?: string;
   tags?: string[];
 };
@@ -37,24 +36,31 @@ const options: Option[] = [
     tab: "Transform Outdoors",
     title: "See your outdoor space differently.",
     icon: "/icons/outdoors.svg",
-    body: "Reimagine gardens, landscapes and pools with new materials, planting and light.",
+    body: "Explore new possibilities for gardens, landscapes, pools and outdoor spaces.",
     cta: "Explore Outdoors",
+    // The prototype reuses the How It Works "Create" artwork here.
+    image: "/images/how-it-works/create.jpg",
+    tags: ["Outdoor Visualization", "Garden Design", "Hardscape Design", "Spa & Pool Redesign", "Sky Transformation"],
   },
   {
     key: "details",
     tab: "Refine the Details",
     title: "Change the details that shape a space.",
     icon: "/icons/paint-roller.svg",
-    body: "Swap furniture, decor and lighting to see how the details change the feel.",
+    body: "Refresh furniture, redefine decor, experiment with materials and refine the way a space feels.",
     cta: "Explore Details",
+    image: "/images/transform/refine-details.jpg",
+    tags: ["Furniture Refresh", "Decor Re-definition", "Material Refinement", "Object Placement"],
   },
   {
     key: "images",
     tab: "Perfect Your Images",
     title: "Make every image work harder.",
     icon: "/icons/image.svg",
-    body: "Clean up, enhance and correct perspective so every photo is presentation-ready.",
-    cta: "Explore Images",
+    body: "Clean up, enhance and correct your visuals before you share or use them.",
+    cta: "Explore Image Tools",
+    image: "/images/transform/perfect-images.jpg",
+    tags: ["Visual Cleanup", "Image Enhancement", "Resolution Enhancement", "Perspective Correction"],
   },
 ];
 
@@ -65,7 +71,7 @@ export default function WhatToTransform() {
   return (
     <Section tone="offwhite" padded={false} className="border-y border-stone-200 py-20 lg:py-28">
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">02 — What Can You Create?</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
             What do you want to transform?
@@ -74,7 +80,7 @@ export default function WhatToTransform() {
             Start with the outcome you have in mind. Choose a direction and VastuNord gives you the
             tools to bring it to life.
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,0.45fr)_minmax(0,0.55fr)] lg:items-center lg:gap-16">
           <div className="flex flex-col gap-2">
@@ -87,10 +93,10 @@ export default function WhatToTransform() {
                   aria-pressed={isActive}
                   onClick={() => setActive(opt.key)}
                   className={clsx(
-                    "flex items-center gap-4 rounded-2xl border p-5 text-left transition-[background-color,border-color,filter]",
+                    "flex items-center gap-4 rounded-2xl border p-5 text-left transition-[background-color,border-color,transform]",
                     isActive
-                      ? "border-brand-teal/15 bg-white drop-shadow-[0_18px_25px_rgba(1,41,58,0.8)]"
-                      : "border-transparent hover:bg-white/60"
+                      ? "border-brand-teal/15 bg-white shadow-[0_18px_50px_-38px_rgba(1,41,58,0.8)]"
+                      : "border-transparent hover:-translate-y-px hover:border-stone-200 hover:bg-white/60"
                   )}
                 >
                   <span
@@ -119,7 +125,7 @@ export default function WhatToTransform() {
             })}
           </div>
 
-          <article className="overflow-hidden rounded-3xl border border-stone-200 bg-white">
+          <Reveal as="article" delay={40} className="overflow-hidden rounded-3xl border border-stone-200 bg-white">
             <div className="relative aspect-[16/10] bg-brand-navy">
               {current.image && (
                 <Image
@@ -155,7 +161,7 @@ export default function WhatToTransform() {
                 {current.cta}
               </Button>
             </div>
-          </article>
+          </Reveal>
         </div>
       </PageContainer>
     </Section>

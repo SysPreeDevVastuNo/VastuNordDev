@@ -6,6 +6,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 type Billing = "monthly" | "annual";
 
@@ -54,13 +55,13 @@ export default function PricingPlans() {
     <Section id="plans" padded={false} className="py-20 lg:py-28">
       <PageContainer>
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-[768px]">
+          <Reveal className="max-w-[768px]">
             <p className="eyebrow text-stone-500">Plans</p>
             <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
               Pay for possibilities, not per render.
             </h2>
-          </div>
-          <div className="shrink-0">
+          </Reveal>
+          <Reveal delay={60} className="shrink-0">
             <div role="tablist" className="inline-flex gap-1 rounded-full border border-stone-200 bg-stone-50 p-1">
               {billingOptions.map((option) => {
                 const active = option.key === billing;
@@ -82,13 +83,15 @@ export default function PricingPlans() {
               })}
             </div>
             <p className="pt-3 text-sm leading-5 text-stone-500">Annual billing saves about 20%.</p>
-          </div>
+          </Reveal>
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-2">
-          {plans.map((plan) => (
-            <article
+          {plans.map((plan, i) => (
+            <Reveal
+              as="article"
               key={plan.name}
+              delay={i * 80}
               className={clsx(
                 "flex flex-col rounded-3xl border p-8 lg:p-10",
                 plan.featured ? "border-brand-teal bg-brand-teal" : "border-stone-200 bg-white"
@@ -161,7 +164,7 @@ export default function PricingPlans() {
                 />
                 {plan.cta}
               </Link>
-            </article>
+            </Reveal>
           ))}
         </div>
       </PageContainer>

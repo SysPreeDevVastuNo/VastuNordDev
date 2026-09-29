@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 /**
@@ -13,8 +13,6 @@ type Story = {
   key: string;
   label: string;
   caption: string;
-  // The Detail story has no artwork in Figma yet, so the card renders its
-  // plain navy surface for it until the images are supplied.
   before?: string;
   after?: string;
 };
@@ -37,7 +35,9 @@ const stories: Story[] = [
   {
     key: "detail",
     label: "Detail Refinement",
-    caption: "Change the details that shape a space.",
+    caption: "Refine the details that define a space.",
+    before: "/images/hero/detail-before.jpg",
+    after: "/images/hero/detail-after.jpg",
   },
 ];
 
@@ -45,9 +45,12 @@ export default function StoryCard({ initialStory = 0 }: { initialStory?: number 
   const [active, setActive] = useState(initialStory);
   const story = stories[active];
   const go = (i: number) => setActive((i + stories.length) % stories.length);
+  // The prototype holds the finished reveal for 260ms before moving on.
+  const advance = useRef<ReturnType<typeof setTimeout>>(undefined);
+  useEffect(() => () => clearTimeout(advance.current), [active]);
 
   return (
-    <div className="relative aspect-[4/5] w-full max-w-xl overflow-hidden rounded-3xl border border-white/12 bg-brand-navy lg:aspect-[3/4] lg:max-w-none">
+    <div className="story-card relative aspect-[4/5] w-full max-w-xl overflow-hidden rounded-3xl border border-white/12 bg-brand-navy lg:aspect-[3/4] lg:max-w-none">
       {story.before && story.after && (
         <>
           <Image
@@ -96,7 +99,9 @@ export default function StoryCard({ initialStory = 0 }: { initialStory?: number 
               <span
                 key={`fill-${active}`}
                 className="story-fill block h-full rounded-full bg-white"
-                onAnimationEnd={() => go(active + 1)}
+                onAnimationEnd={() => {
+                  advance.current = setTimeout(() => go(active + 1), 260);
+                }}
               />
             )}
           </button>

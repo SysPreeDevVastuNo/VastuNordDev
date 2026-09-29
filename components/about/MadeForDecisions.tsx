@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 // Figma reuses the Home "Who It's For" photos here.
 const audiences = [
@@ -31,16 +32,16 @@ export default function MadeForDecisions() {
   return (
     <Section tone="offwhite" padded={false} className="border-y border-stone-200 py-20 lg:py-28">
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">Made for Real Decisions</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
             Different people. Same need: see it before moving forward.
           </h2>
-        </div>
+        </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3">
-          {audiences.map((a) => (
-            <article key={a.title} className="relative h-[418px] overflow-hidden rounded-3xl border border-stone-200">
+          {audiences.map((a, i) => (
+            <Reveal as="article" key={a.title} delay={i * 70} className="relative h-[418px] overflow-hidden rounded-3xl border border-stone-200">
               <Image src={a.image} alt="" fill sizes="(min-width: 1024px) 376px, 100vw" className="object-cover" />
               <div aria-hidden className="absolute inset-0 bg-linear-to-t from-black/85 via-black/35 to-black/0" />
               <div className="absolute inset-x-0 bottom-0 p-7">
@@ -53,7 +54,7 @@ export default function MadeForDecisions() {
                 </h3>
                 <p className="max-w-[320px] pt-2 text-sm leading-6 text-white/75">{a.body}</p>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </PageContainer>

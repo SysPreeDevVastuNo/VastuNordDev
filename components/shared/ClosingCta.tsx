@@ -2,6 +2,7 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 /**
  * Closing call-to-action banner shared by every page: a full-bleed photo under
@@ -35,7 +36,7 @@ export default function ClosingCta({
   return (
     <Section padded={false} className="pb-16 lg:pb-24">
       <PageContainer>
-        <div className="relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-700">
+        <Reveal className="relative overflow-hidden rounded-3xl border border-stone-200 bg-stone-700">
           {image && (
             <Image src={image} alt="" fill sizes="(min-width: 1280px) 1168px, 100vw" className="object-cover" />
           )}
@@ -58,7 +59,7 @@ export default function ClosingCta({
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </PageContainer>
     </Section>
   );

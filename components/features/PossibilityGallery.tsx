@@ -5,6 +5,7 @@ import Image from "next/image";
 import clsx from "clsx";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const directions = [
   { label: "Before", caption: "Your space, as it is today.", image: "/images/features/hero-background.png" },
@@ -55,7 +56,7 @@ export default function PossibilityGallery() {
     <Section id="possibilities" tone="dark" padded={false} className="py-20 lg:py-28">
       <PageContainer>
         <div className="flex items-end justify-between gap-6">
-          <div className="max-w-[768px]">
+          <Reveal className="max-w-[768px]">
             <p className="eyebrow text-white/70">Possibility Explorer</p>
             <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-white sm:text-[44px] xl:text-[52px]">
               Explore possibilities before committing
@@ -64,7 +65,7 @@ export default function PossibilityGallery() {
               Better decisions come from comparing possibilities. Swipe between directions — this is
               exploration, not a single generated answer.
             </p>
-          </div>
+          </Reveal>
           {/* Figma's mobile frame drops the arrows; the track is swiped instead. */}
           <div className="hidden shrink-0 gap-2 md:flex">
             <button
@@ -88,6 +89,7 @@ export default function PossibilityGallery() {
           </div>
         </div>
 
+        <Reveal delay={80}>
         <div
           ref={trackRef}
           className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -118,6 +120,7 @@ export default function PossibilityGallery() {
             </figure>
           ))}
         </div>
+        </Reveal>
 
         <div className="flex justify-center gap-2 pt-6">
           {directions.map((d, i) => (

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const topics = [
   { label: "Home Renovation", image: "home-renovation" },
@@ -17,25 +18,25 @@ export default function TopicGrid() {
   return (
     <Section tone="offwhite" padded={false} className="border-y border-stone-200 py-20 lg:py-28">
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">03 — Browse by Topic</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
             Find the decision you&apos;re facing.
           </h2>
-        </div>
+        </Reveal>
         <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {topics.map((topic) => (
+          {topics.map((topic, i) => (
+            <Reveal key={topic.label} delay={i * 45}>
             <button
-              key={topic.label}
               type="button"
-              className="group relative h-40 overflow-hidden rounded-3xl border border-stone-200 text-left"
+              className="group relative block h-40 w-full overflow-hidden rounded-3xl border border-stone-200 text-left"
             >
               <Image
                 src={`/images/resources/topics/${topic.image}.jpg`}
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 280px, (min-width: 640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="object-cover transition-transform group-hover:scale-[1.03]"
               />
               <span
                 aria-hidden
@@ -46,6 +47,7 @@ export default function TopicGrid() {
                 <Image src="/icons/arrow-up-right-orange-sm.svg" alt="" width={16} height={16} />
               </span>
             </button>
+            </Reveal>
           ))}
         </div>
       </PageContainer>

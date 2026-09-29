@@ -3,6 +3,7 @@ import Button from "@/components/ui/Button";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
 import StoryCard from "@/components/shared/StoryCard";
+import Reveal from "@/components/ui/Reveal";
 
 export default function AboutHero() {
   return (
@@ -23,7 +24,7 @@ export default function AboutHero() {
 
       <PageContainer className="pt-28 pb-20 lg:pt-36">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,581.05fr)_minmax(0,522.94fr)] lg:gap-16">
-          <div>
+          <Reveal>
             <p className="eyebrow text-white/70">Why VastuNord</p>
             <h1 className="mt-6 text-[35.2px] font-semibold leading-[1.02] tracking-[-0.0135em] text-white sm:text-[52px] xl:text-[72px]">
               You shouldn&rsquo;t have to imagine it all in your head.
@@ -43,9 +44,11 @@ export default function AboutHero() {
                 See Examples
               </Button>
             </div>
-          </div>
+          </Reveal>
 
-          <StoryCard />
+          <Reveal delay={120}>
+            <StoryCard />
+          </Reveal>
         </div>
       </PageContainer>
     </Section>

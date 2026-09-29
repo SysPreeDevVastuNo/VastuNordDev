@@ -1,9 +1,8 @@
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
 import StepShowcase, { type ShowcaseStep } from "@/components/shared/StepShowcase";
+import Reveal from "@/components/ui/Reveal";
 
-// Only step 01's detail line and artwork exist in Figma; the other detail
-// lines carry over from the previous build and their card shows no image.
 const steps: ShowcaseStep[] = [
   {
     n: "01",
@@ -20,6 +19,7 @@ const steps: ShowcaseStep[] = [
     title: "Bring your image and set the direction.",
     body: "Upload an image, choose references, add a prompt, or use the controls your task needs.",
     icon: "/icons/step-create.svg",
+    image: "/images/how-it-works/create.jpg",
   },
   {
     n: "03",
@@ -27,6 +27,7 @@ const steps: ShowcaseStep[] = [
     title: "Generate, refine and compare possibilities.",
     body: "Try different directions, adjust the result, save promising versions and keep exploring.",
     icon: "/icons/step-explore.svg",
+    image: "/images/how-it-works/explore.jpg",
   },
   {
     n: "04",
@@ -34,6 +35,7 @@ const steps: ShowcaseStep[] = [
     title: "Choose what works and take it forward.",
     body: "Export, share, present or use your chosen direction to move ahead.",
     icon: "/icons/step-decide.svg",
+    image: "/images/how-it-works/decide.jpg",
   },
 ];
 
@@ -42,7 +44,7 @@ export default function HowItWorks() {
     <Section id="how-it-works" tone="dark" padded={false} className="relative py-20 lg:py-28">
       <div aria-hidden className="accent-rule" />
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-white/70">04 — How It Works</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-white sm:text-[44px] xl:text-[52px]">
             From idea to visual in four steps.
@@ -51,7 +53,7 @@ export default function HowItWorks() {
             VastuNord adapts the workflow to what you&apos;re trying to create, so you can move from an
             idea to something you can actually see.
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-14">
           <StepShowcase steps={steps} tone="dark" />

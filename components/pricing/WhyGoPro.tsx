@@ -2,6 +2,7 @@ import Image from "next/image";
 import clsx from "clsx";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const tiers = [
   {
@@ -26,7 +27,7 @@ export default function WhyGoPro() {
       <div aria-hidden className="accent-rule" />
       <PageContainer>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
-          <div className="max-w-[768px]">
+          <Reveal className="max-w-[768px]">
             <p className="eyebrow text-white/70">03 — Why Go Pro</p>
             <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-white sm:text-[44px] xl:text-[52px]">
               Unlock every possibility.
@@ -34,9 +35,9 @@ export default function WhyGoPro() {
             <p className="max-w-[576px] pt-5 leading-7 text-brand-cream/70">
               Free answers one question. Pro lets you keep asking until the answer is obvious.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <Reveal delay={80} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {tiers.map((tier) => (
               <div
                 key={tier.label}
@@ -53,7 +54,7 @@ export default function WhyGoPro() {
                 <Image src={tier.icon} alt="" width={22} height={22} className="mt-8" />
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </PageContainer>
     </Section>

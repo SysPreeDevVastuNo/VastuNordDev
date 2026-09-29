@@ -2,6 +2,7 @@ import Image from "next/image";
 import clsx from "clsx";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const stats = [
   { value: "40K+", label: "Spaces Transformed" },
@@ -34,7 +35,7 @@ export default function SocialProof() {
       <div aria-hidden className="accent-rule" />
       <PageContainer>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,462.39fr)_minmax(0,625.61fr)] lg:gap-20">
-          <div>
+          <Reveal>
             <p className="eyebrow text-white/70">06 — Social Proof</p>
             <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] sm:text-[44px] xl:text-[52px]">
               Built for ideas worth seeing.
@@ -43,9 +44,9 @@ export default function SocialProof() {
               From everyday home changes to professional design decisions, VastuNord helps people
               explore possibilities before moving forward.
             </p>
-          </div>
+          </Reveal>
 
-          <dl className="grid grid-cols-2 gap-x-8 gap-y-10">
+          <Reveal as="dl" delay={90} className="grid grid-cols-2 gap-x-8 gap-y-10">
             {stats.map((s) => (
               <div key={s.label} className="flex flex-col-reverse border-t border-white/15 pt-5">
                 <dt className="pt-2 text-sm leading-5 text-brand-cream/60">{s.label}</dt>
@@ -54,13 +55,15 @@ export default function SocialProof() {
                 </dd>
               </div>
             ))}
-          </dl>
+          </Reveal>
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-5 lg:grid-cols-3">
           {testimonials.map((t, i) => (
-            <figure
+            <Reveal
+              as="figure"
               key={t.role}
+              delay={i * 60}
               className={clsx(
                 "flex flex-col rounded-3xl border border-white/12 p-7",
                 // Figma highlights the middle card on every breakpoint.
@@ -75,7 +78,7 @@ export default function SocialProof() {
                   <p className="pt-1 text-sm leading-5 text-brand-cream/55">{t.role}</p>
                 </div>
               </figcaption>
-            </figure>
+            </Reveal>
           ))}
         </div>
       </PageContainer>

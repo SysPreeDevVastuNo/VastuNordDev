@@ -1,5 +1,6 @@
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 const quotes = [
   { n: "01", quote: "What if we changed this?", caption: "The idea that starts every project." },
@@ -12,7 +13,7 @@ export default function ProblemQuotes() {
   return (
     <Section padded={false} className="py-20 lg:py-28">
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">The Problem</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
             We all have ideas. Seeing them is the hard part.
@@ -22,10 +23,10 @@ export default function ProblemQuotes() {
             imagination breaks when decisions become real. And guessing is expensive when it involves
             your home, money, or time.
           </p>
-        </div>
+        </Reveal>
 
         {/* Mobile: Figma runs the cards as a full-bleed sideways row (78vw each). */}
-        <div className="-mx-6 mt-14 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden">
+        <Reveal delay={80} className="-mx-6 mt-14 flex snap-x snap-mandatory scroll-px-6 gap-4 overflow-x-auto px-6 [scrollbar-width:none] md:mx-0 md:grid md:grid-cols-2 md:overflow-visible md:px-0 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden">
           {quotes.map((q) => (
             <article
               key={q.n}
@@ -42,7 +43,7 @@ export default function ProblemQuotes() {
               </div>
             </article>
           ))}
-        </div>
+        </Reveal>
       </PageContainer>
     </Section>
   );

@@ -41,10 +41,10 @@ export default function Faq({
             <button
               type="button"
               onClick={() => setOpenIndex(isOpen ? null : i)}
-              className={clsx("flex w-full items-center justify-between gap-6 text-left", v.row)}
+              className={clsx("group flex w-full items-center justify-between gap-6 text-left", v.row)}
               aria-expanded={isOpen}
             >
-              <span className={clsx("font-heading font-medium leading-6 text-brand-teal", v.question)}>
+              <span className={clsx("font-heading font-medium leading-6 text-brand-teal transition-colors group-hover:text-brand-orange", v.question)}>
                 {item.q}
               </span>
               {variant === "chevron" ? (
@@ -53,7 +53,7 @@ export default function Faq({
                   alt=""
                   width={18}
                   height={18}
-                  className={clsx("shrink-0 transition-transform duration-300", isOpen && "rotate-180")}
+                  className={clsx("shrink-0 transition-transform", isOpen && "rotate-180")}
                 />
               ) : (
                 <Image
@@ -61,13 +61,13 @@ export default function Faq({
                   alt=""
                   width={16}
                   height={16}
-                  className={clsx("shrink-0 transition-transform duration-300", isOpen && "rotate-45")}
+                  className={clsx("shrink-0 transition-transform", isOpen && "rotate-45")}
                 />
               )}
             </button>
             <div
               className={clsx(
-                "grid transition-[grid-template-rows] duration-300 ease-out",
+                "grid transition-[grid-template-rows]",
                 isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
               )}
             >

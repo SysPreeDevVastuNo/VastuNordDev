@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import MaskIcon from "@/components/ui/MaskIcon";
+import Reveal from "@/components/ui/Reveal";
 
 export type ShowcaseStep = {
   n: string;
@@ -41,7 +42,7 @@ const tones: Record<
   dark: {
     row: "border-transparent",
     rowActive: "border-white/15 bg-white/8",
-    rowHover: "hover:bg-white/4",
+    rowHover: "hover:border-white/12 hover:bg-white/4",
     num: "text-white/35",
     iconIdle: "bg-white/50",
     label: "text-white",
@@ -87,7 +88,7 @@ export default function StepShowcase({ steps, tone = "dark" }: { steps: Showcase
                 aria-pressed={isActive}
                 onClick={() => setActive(i)}
                 className={clsx(
-                  "flex w-full items-center gap-5 rounded-2xl border p-5 text-left transition-colors",
+                  "flex w-full items-center gap-5 rounded-2xl border p-5 text-left transition-[background-color,border-color]",
                   isActive ? t.rowActive : [t.row, t.rowHover]
                 )}
               >
@@ -113,7 +114,7 @@ export default function StepShowcase({ steps, tone = "dark" }: { steps: Showcase
                   {step.body && (
                     <span
                       className={clsx(
-                        "grid transition-[grid-template-rows] duration-300 ease-out",
+                        "grid transition-[grid-template-rows]",
                         isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                       )}
                     >
@@ -140,7 +141,7 @@ export default function StepShowcase({ steps, tone = "dark" }: { steps: Showcase
         })}
       </ol>
 
-      <div className={clsx("overflow-hidden rounded-3xl border", t.card)}>
+      <Reveal delay={60} className={clsx("overflow-hidden rounded-3xl border", t.card)}>
         <div className="relative aspect-[4/3]">
           {current.image && (
             <Image
@@ -152,7 +153,7 @@ export default function StepShowcase({ steps, tone = "dark" }: { steps: Showcase
             />
           )}
           <div aria-hidden className={clsx("absolute inset-0 bg-linear-to-t", t.shade)} />
-          <div className={clsx("absolute inset-x-5 bottom-5 flex items-center gap-2 rounded-2xl border px-4 py-3", t.pill)}>
+          <div className={clsx("absolute inset-x-5 bottom-5 flex items-center gap-2 rounded-2xl border px-4 py-3 backdrop-blur", t.pill)}>
             <MaskIcon src={current.cardIcon ?? current.icon} className={clsx("size-4", t.pillIcon)} />
             <span
               className={clsx("font-heading text-sm font-medium uppercase leading-5 tracking-[0.14em]", t.pillText)}
@@ -167,12 +168,12 @@ export default function StepShowcase({ steps, tone = "dark" }: { steps: Showcase
               key={step.n}
               className={clsx(
                 "h-1 flex-1 rounded-full transition-colors",
-                i === active ? "bg-brand-orange" : t.barIdle
+                i <= active ? "bg-brand-orange" : t.barIdle
               )}
             />
           ))}
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }

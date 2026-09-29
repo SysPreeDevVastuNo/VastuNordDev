@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import Button from "@/components/ui/Button";
+import Reveal from "@/components/ui/Reveal";
 
 // Figma exports the selected icon (space) at full white and the others at 80%
 // white; the space icon is dimmed to match when it isn't selected.
@@ -19,7 +20,7 @@ export default function QuickTransformBar() {
 
   return (
     <div className="pt-14">
-      <div className="rounded-3xl border border-white/12 bg-white/5 p-6 lg:p-8">
+      <Reveal delay={80} className="rounded-3xl border border-white/12 bg-white/5 p-6 lg:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="eyebrow text-white/55">What do you want to transform?</p>
@@ -49,7 +50,7 @@ export default function QuickTransformBar() {
                 aria-pressed={isActive}
                 onClick={() => setActive(key)}
                 className={clsx(
-                  "flex items-start gap-3 rounded-2xl border p-4 text-left transition-colors",
+                  "flex items-start gap-3 rounded-2xl border p-4 text-left transition-[background-color,border-color,transform] hover:-translate-y-px",
                   isActive
                     ? "border-brand-orange/60 bg-brand-orange/12"
                     : "border-white/12 bg-white/3 hover:border-white/25"
@@ -77,7 +78,7 @@ export default function QuickTransformBar() {
             );
           })}
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }

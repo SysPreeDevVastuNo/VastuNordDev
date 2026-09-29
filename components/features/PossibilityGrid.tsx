@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 // Figma reuses the Possibility Explorer photos for this gallery.
 const directions = [
@@ -17,7 +18,7 @@ export default function PossibilityGrid() {
   return (
     <Section padded={false} className="py-20 lg:py-28">
       <PageContainer>
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">Transformation Gallery</p>
           <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
             See what&apos;s possible
@@ -26,9 +27,9 @@ export default function PossibilityGrid() {
             Never one final image — always a set of directions, because the point is to compare, not
             to accept.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 items-start gap-5 lg:grid-cols-[352fr_796fr] [&>*]:min-w-0">
+        <Reveal delay={80} className="mt-14 grid grid-cols-1 items-start gap-5 lg:grid-cols-[352fr_796fr] [&>*]:min-w-0">
           <figure className="overflow-hidden rounded-3xl border border-stone-200">
             <div className="relative aspect-[4/3]">
               <Image
@@ -65,7 +66,7 @@ export default function PossibilityGrid() {
               </figure>
             ))}
           </div>
-        </div>
+        </Reveal>
       </PageContainer>
     </Section>
   );

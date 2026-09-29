@@ -1,5 +1,6 @@
 import Image from "next/image";
 import clsx from "clsx";
+import Reveal from "@/components/ui/Reveal";
 
 export type FeatureGridItem = {
   title: string;
@@ -30,14 +31,14 @@ export default function FeatureGrid({
         columns === 3 ? "md:grid-cols-3" : "md:grid-cols-2"
       )}
     >
-      {items.map((item) => (
-        <div key={item.title} className="bg-white p-7">
+      {items.map((item, i) => (
+        <Reveal key={item.title} delay={i * 55} className="bg-white p-7">
           <Image src={item.icon} alt="" width={24} height={24} />
           <h3 className="pt-5 font-heading font-medium leading-6 tracking-[-0.0135em] text-brand-teal">
             {item.title}
           </h3>
           <p className="pt-3 text-sm leading-6 text-stone-600">{item.body}</p>
-        </div>
+        </Reveal>
       ))}
       {Array.from({ length: fillers }, (_, i) => (
         <div key={`filler-${i}`} aria-hidden className="hidden bg-brand-offwhite md:block" />

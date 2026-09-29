@@ -2,6 +2,7 @@ import Image from "next/image";
 import Button from "@/components/ui/Button";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
+import Reveal from "@/components/ui/Reveal";
 
 // Figma's multi-stop scrim: solid navy at the bottom, easing to a translucent teal at the top.
 const scrim =
@@ -15,7 +16,7 @@ export default function ContactHero() {
       <div aria-hidden className="accent-rule" />
 
       <PageContainer className="flex min-h-[420px] flex-col justify-end pt-28 pb-14 lg:min-h-[520px] lg:pb-20">
-        <div className="max-w-[768px]">
+        <Reveal className="max-w-[768px]">
           <p className="eyebrow text-brand-orange">01 — Contact</p>
           <h1 className="mt-6 text-[33.6px] font-semibold leading-[1.04] tracking-[-0.0135em] text-white sm:text-[48px] xl:text-[68px]">
             Let&rsquo;s talk about your space.
@@ -29,7 +30,7 @@ export default function ContactHero() {
               Get in Touch
             </Button>
           </div>
-        </div>
+        </Reveal>
       </PageContainer>
     </Section>
   );

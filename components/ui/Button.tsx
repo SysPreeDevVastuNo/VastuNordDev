@@ -33,7 +33,7 @@ export default function Button({
     <Link
       href={href}
       className={clsx(
-        "inline-flex items-center justify-center gap-2 rounded-2xl font-semibold transition-colors",
+        "inline-flex items-center justify-center gap-2 rounded-2xl font-semibold transition-[transform,background-color,border-color,color] active:translate-y-px",
         variantStyles[variant],
         sizeStyles[size],
         className

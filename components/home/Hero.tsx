@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button";
 import Section from "@/components/layout/Section";
 import PageContainer from "@/components/layout/PageContainer";
 import StoryCard from "@/components/shared/StoryCard";
+import Reveal from "@/components/ui/Reveal";
 
 const journey = ["Choose", "Create", "Explore", "Decide"];
 
@@ -26,7 +27,7 @@ export default function Hero({ children }: { children?: React.ReactNode }) {
 
       <PageContainer className="pt-28 pb-16 lg:pt-36 lg:pb-20">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.82fr)] lg:gap-16">
-          <div>
+          <Reveal>
             <Eyebrow light>Visual Design &amp; Transformation</Eyebrow>
             <h1 className="mt-6 text-[38.4px] font-semibold leading-[0.98] tracking-[-0.0135em] text-white sm:text-[56px] xl:text-[84px]">
               See What&rsquo;s Possible.
@@ -55,10 +56,12 @@ export default function Hero({ children }: { children?: React.ReactNode }) {
                 </span>
               ))}
             </p>
-          </div>
+          </Reveal>
 
           {/* Opens on Exterior with Interior already played — the state the Figma frame captures. */}
-          <StoryCard initialStory={1} />
+          <Reveal delay={120}>
+            <StoryCard initialStory={1} />
+          </Reveal>
         </div>
 
         {children}
