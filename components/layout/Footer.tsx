@@ -53,7 +53,7 @@ export default function Footer() {
 
         {columns.map((col) => (
           <nav key={col.title} aria-label={col.title}>
-            <h3 className="eyebrow text-stone-400">{col.title}</h3>
+            <h3 className="eyebrow font-sans text-stone-400">{col.title}</h3>
             <ul className="mt-5 flex flex-col gap-3">
               {col.links.map((link) => (
                 <li key={link.label} className="text-[15px] leading-[22.5px]">

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 const links = [
@@ -17,11 +17,24 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  // Past 12px of scroll the bar turns frosted so content blurs behind it.
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   // Figma marks the current page's link in teal (e.g. "Pricing" on /pricing).
   const isCurrent = (href: string) => pathname === href || pathname.startsWith(href + "/");
 
   return (
-    <header className="sticky top-0 z-50 border-b border-transparent bg-white">
+    <header
+      className={clsx(
+        "sticky top-0 z-50 border-b transition-[background-color,border-color]",
+        scrolled ? "border-stone-200 bg-white/90 backdrop-blur-md" : "border-transparent bg-white"
+      )}
+    >
       <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-8 px-6 md:px-10 lg:px-14 xl:h-20">
         <Link href="/" aria-label="VastuNord home" className="shrink-0">
           <Image

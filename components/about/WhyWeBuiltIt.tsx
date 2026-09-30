@@ -31,7 +31,7 @@ export default function WhyWeBuiltIt() {
             {beliefs.map((label, i) => {
               const last = i === beliefs.length - 1;
               return (
-                <li key={label} className="flex items-center gap-4 bg-brand-teal px-6 py-5">
+                <li key={label} className="flex items-center gap-4 bg-brand-teal px-6 py-5 transition-colors hover:bg-[#01293a]">
                   <span className="font-heading text-xs font-semibold leading-4 text-brand-orange">
                     0{i + 1}
                   </span>

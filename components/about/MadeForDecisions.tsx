@@ -41,8 +41,8 @@ export default function MadeForDecisions() {
 
         <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-3">
           {audiences.map((a, i) => (
-            <Reveal as="article" key={a.title} delay={i * 70} className="relative h-[418px] overflow-hidden rounded-3xl border border-stone-200">
-              <Image src={a.image} alt="" fill sizes="(min-width: 1024px) 376px, 100vw" className="object-cover" />
+            <Reveal as="article" key={a.title} delay={i * 70} className="group relative h-[418px] overflow-hidden rounded-3xl border border-stone-200">
+              <Image src={a.image} alt="" fill sizes="(min-width: 1024px) 376px, 100vw" className="object-cover transition-transform group-hover:scale-[1.03]" />
               <div aria-hidden className="absolute inset-0 bg-linear-to-t from-black/85 via-black/35 to-black/0" />
               <div className="absolute inset-x-0 bottom-0 p-7">
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/12 px-3 py-1.5">

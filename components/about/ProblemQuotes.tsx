@@ -30,9 +30,9 @@ export default function ProblemQuotes() {
           {quotes.map((q) => (
             <article
               key={q.n}
-              className="flex min-h-[220px] w-[78vw] shrink-0 snap-start flex-col justify-between rounded-3xl border border-stone-200 bg-brand-offwhite p-7 md:w-auto"
+              className="group flex min-h-[220px] w-[78vw] shrink-0 snap-start flex-col justify-between rounded-3xl border border-stone-200 bg-brand-offwhite p-7 transition-[transform,border-color,background-color] hover:-translate-y-1 hover:border-brand-teal/20 hover:bg-white md:w-auto"
             >
-              <p aria-hidden className="font-heading text-4xl font-semibold leading-10 text-stone-200">
+              <p aria-hidden className="font-heading text-4xl font-semibold leading-10 text-stone-200 transition-colors group-hover:text-brand-orange/40">
                 {q.n}
               </p>
               <div>

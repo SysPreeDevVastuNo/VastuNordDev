@@ -32,12 +32,14 @@ export default function FeatureGrid({
       )}
     >
       {items.map((item, i) => (
-        <Reveal key={item.title} delay={i * 55} className="bg-white p-7">
+        <Reveal key={item.title} delay={i * 55} className="bg-white">
+          <div className="h-full p-7 transition-colors hover:bg-brand-offwhite">
           <Image src={item.icon} alt="" width={24} height={24} />
           <h3 className="pt-5 font-heading font-medium leading-6 tracking-[-0.0135em] text-brand-teal">
             {item.title}
           </h3>
           <p className="pt-3 text-sm leading-6 text-stone-600">{item.body}</p>
+          </div>
         </Reveal>
       ))}
       {Array.from({ length: fillers }, (_, i) => (

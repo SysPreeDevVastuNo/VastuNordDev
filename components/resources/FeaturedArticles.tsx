@@ -55,9 +55,10 @@ export default function FeaturedArticles() {
         </Reveal>
 
         <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-[614fr_534fr] lg:items-start [&>*]:min-w-0">
-          <Reveal as="article" className="flex flex-col overflow-hidden rounded-3xl border border-stone-200 lg:h-[686px]">
+          <Reveal className="lg:h-[686px]">
+          <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-stone-200 transition-transform hover:-translate-y-1">
             <div className="relative h-72 shrink-0 lg:h-96">
-              <Image src={featured.image} alt="" fill sizes="(min-width: 1024px) 614px, 100vw" className="object-cover" />
+              <Image src={featured.image} alt="" fill sizes="(min-width: 1024px) 614px, 100vw" className="object-cover transition-transform group-hover:scale-[1.03]" />
             </div>
             <div className="flex-1 bg-brand-offwhite p-8">
               <div className="flex items-center gap-3 text-xs leading-4 text-stone-500">
@@ -70,16 +71,18 @@ export default function FeaturedArticles() {
               <p className="max-w-[448px] pt-4 text-sm leading-7 text-stone-600">{featured.body}</p>
               <a href="#" className="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold leading-5 text-brand-orange">
                 Read the guide
-                <Image src="/icons/arrow-up-right-orange.svg" alt="" width={14} height={14} />
+                <Image src="/icons/arrow-up-right-orange.svg" alt="" width={14} height={14} className="transition-transform group-hover:translate-x-0.5" />
               </a>
             </div>
+          </article>
           </Reveal>
 
           <div className="flex flex-col gap-4">
             {articles.map((a, i) => (
-              <Reveal as="article" key={a.title} delay={i * 60} className="flex items-start gap-5 rounded-3xl border border-stone-200 bg-white p-4">
+              <Reveal key={a.title} delay={i * 60}>
+              <article className="group flex items-start gap-5 rounded-3xl border border-stone-200 bg-white p-4 transition-transform hover:-translate-y-1">
                 <div className="relative size-24 shrink-0 overflow-hidden rounded-xl lg:size-28">
-                  <Image src={a.image} alt="" fill sizes="112px" className="object-cover" />
+                  <Image src={a.image} alt="" fill sizes="112px" className="object-cover transition-transform group-hover:scale-[1.05]" />
                 </div>
                 <div className="min-w-0">
                   <p className="flex items-center gap-3 text-xs leading-4 text-stone-500">
@@ -92,6 +95,7 @@ export default function FeaturedArticles() {
                   </h3>
                   <p className="line-clamp-2 pt-2 text-sm leading-6 text-stone-600">{a.body}</p>
                 </div>
+              </article>
               </Reveal>
             ))}
           </div>
