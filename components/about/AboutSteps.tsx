@@ -38,7 +38,7 @@ const steps: ShowcaseStep[] = [
 
 export default function AboutSteps() {
   return (
-    <Section padded={false} className="py-20 lg:py-28">
+    <Section id="how-it-works" padded={false} className="py-20 lg:py-28">
       <PageContainer>
         <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">How It Works</p>

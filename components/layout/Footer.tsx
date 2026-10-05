@@ -5,7 +5,7 @@ const columns = [
   {
     title: "Solutions",
     links: [
-      { href: "/resources", label: "Living Room Design" },
+      { href: "/features", label: "Living Room Design" },
       { href: "/resources", label: "Virtual Staging" },
       { href: "/resources", label: "Backyard Design" },
       { href: "/resources", label: "Scandinavian Living Room" },
@@ -15,7 +15,7 @@ const columns = [
     title: "Product",
     links: [
       { href: "/features", label: "Features" },
-      { href: "/features", label: "Examples" },
+      { href: "/resources", label: "Examples" },
       { href: "/features", label: "Use Cases" },
       { href: "/pricing", label: "Pricing" },
     ],

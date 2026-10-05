@@ -69,7 +69,7 @@ export default function Home() {
         primaryLabel="Start Creating"
         primaryHref="/pricing"
         secondaryLabel="Explore What You Can Do"
-        secondaryHref="/resources"
+        secondaryHref="/features"
       />
     </>
   );

@@ -27,7 +27,7 @@ export default function AboutPage() {
         primaryLabel="Start Creating"
         primaryHref="/pricing"
         secondaryLabel="Explore Examples"
-        secondaryHref="/resources"
+        secondaryHref="/"
       />
     </>
   );

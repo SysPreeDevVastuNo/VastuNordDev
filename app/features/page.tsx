@@ -29,7 +29,7 @@ export default function FeaturesPage() {
         title="Start visualizing your possibilities"
         description="Explore multiple directions before making expensive decisions — and move forward knowing you have already seen the result."
         primaryLabel="Upload Your Space"
-        primaryHref="/pricing"
+        primaryHref="#demo"
         secondaryLabel="Sign Up Free"
         secondaryHref="/pricing"
       />

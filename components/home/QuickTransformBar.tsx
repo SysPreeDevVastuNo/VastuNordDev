@@ -33,7 +33,7 @@ export default function QuickTransformBar() {
               <Image src="/icons/upload.svg" alt="" width={16} height={16} />
               Upload an Image
             </Button>
-            <Button href="/pricing" variant="ghost" className="w-full sm:w-auto">
+            <Button href="/features" variant="ghost" className="w-full sm:w-auto">
               <Image src="/icons/folder.svg" alt="" width={16} height={16} />
               Choose from Assets
             </Button>

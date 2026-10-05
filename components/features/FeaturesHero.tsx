@@ -7,7 +7,7 @@ import Reveal from "@/components/ui/Reveal";
 
 export default function FeaturesHero() {
   return (
-    <Section tone="dark" padded={false} className="relative isolate overflow-hidden">
+    <Section id="demo" tone="dark" padded={false} className="relative isolate overflow-hidden">
       <div className="absolute inset-0 -z-10 opacity-30">
         <Image
           src="/images/features/hero-background.png"

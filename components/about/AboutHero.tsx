@@ -7,7 +7,11 @@ import Reveal from "@/components/ui/Reveal";
 
 export default function AboutHero() {
   return (
-    <Section tone="dark" padded={false} className="relative isolate overflow-hidden">
+    <Section
+      tone="dark"
+      padded={false}
+      className="relative isolate overflow-hidden"
+    >
       <Image
         src="/images/shared/unfurnished-open-plan.jpg"
         alt=""
@@ -30,17 +34,26 @@ export default function AboutHero() {
               You shouldn&rsquo;t have to imagine it all in your head.
             </h1>
             <p className="mt-6 max-w-[512px] leading-7 text-brand-cream/75 lg:text-lg">
-              Whether you&rsquo;re changing a room, planning a garden, or exploring a new idea — the
-              hardest part is knowing what it will actually look like. VastuNord helps you see it before
-              you commit.
+              Whether you&rsquo;re changing a room, planning a garden, or
+              exploring a new idea — the hardest part is knowing what it will
+              actually look like. VastuNord helps you see it before you commit.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button href="/pricing" className="w-full sm:w-auto">
                 <Image src="/icons/sparkle.svg" alt="" width={16} height={16} />
                 Start Creating
               </Button>
-              <Button href="/features#possibilities" variant="ghost" className="w-full sm:w-auto">
-                <Image src="/icons/eye-white.svg" alt="" width={16} height={16} />
+              <Button
+                href="#how-it-works"
+                variant="ghost"
+                className="w-full sm:w-auto"
+              >
+                <Image
+                  src="/icons/eye-white.svg"
+                  alt=""
+                  width={16}
+                  height={16}
+                />
                 See Examples
               </Button>
             </div>

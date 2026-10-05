@@ -55,7 +55,7 @@ export default function FeaturedArticles({ items, onClear }: { items: Article[];
                     {featured.title}
                   </h3>
                   <p className="max-w-[448px] pt-4 text-sm leading-7 text-stone-600">{featured.body}</p>
-                  <a href="#" className="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold leading-5 text-brand-orange">
+                  <span className="mt-8 inline-flex items-center gap-1.5 text-sm font-semibold leading-5 text-brand-orange">
                     Read the guide
                     <Image
                       src="/icons/arrow-up-right-orange.svg"
@@ -64,7 +64,7 @@ export default function FeaturedArticles({ items, onClear }: { items: Article[];
                       height={14}
                       className="transition-transform group-hover:translate-x-0.5"
                     />
-                  </a>
+                  </span>
                 </div>
               </article>
             </Reveal>

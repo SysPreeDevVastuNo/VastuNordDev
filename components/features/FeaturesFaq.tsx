@@ -9,31 +9,31 @@ const faqItems = [
   },
   {
     q: "Will it use my actual room?",
-    a: "Yes — every direction is generated from your own photo, so proportions and light stay recognisable.",
+    a: "Yes. Every direction is your uploaded space reimagined, keeping the geometry and light of the real room so what you see is grounded in what you have.",
   },
   {
     q: "How many directions can I compare?",
-    a: "As many as you like on Pro; the Free plan includes two style directions per space.",
+    a: "You can explore every style on the page and set them side by side. Comparing possibilities — not generating one image — is the whole idea.",
   },
   {
     q: "Can I share the results with my family or designer?",
-    a: "Yes, every exploration can be shared with a link so others can see exactly what you're seeing.",
+    a: "Yes. A shared picture is often what turns a stalled decision into an agreed one, so results are made to be sent and discussed.",
   },
   {
     q: "Is this only for full renovations?",
-    a: "No — it works just as well for a single piece of furniture or a small styling change.",
+    a: "No. It works just as well for a weekend refresh, a single new sofa, or a complete redirection of the room.",
   },
   {
     q: "How long does it take to see a result?",
-    a: "New directions typically arrive in the time it takes to make a decision, not days.",
+    a: "Minutes. Upload a photo, choose a direction, and the reimagined room appears — then keep exploring from there",
   },
   {
     q: "What if my room is small or awkwardly shaped?",
-    a: "VastuNord works from your real photo, so it respects the room's actual layout and constraints.",
+    a: "Those are the rooms this helps most. Seeing an awkward space handled well removes the biggest source of hesitation.",
   },
   {
     q: "Do I have to sign up to try it?",
-    a: "You can start exploring on the Free plan without committing to anything.",
+    a: "You can visualize your first direction and explore the possibilities on this page. Signing up free unlocks the full set of directions to compare.",
   },
 ];
 
