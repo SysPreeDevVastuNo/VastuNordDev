@@ -183,7 +183,7 @@
   }
 
   /* Pointer over the card pauses the story, as in the prototype. */
-  .story-card:hover :is(.story-fill, .story-divider, .story-reveal) {
+  .story-card[data-paused="true"] :is(.story-fill, .story-divider, .story-reveal) {
     animation-play-state: paused;
   }
 

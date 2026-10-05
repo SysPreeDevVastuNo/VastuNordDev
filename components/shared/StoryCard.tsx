@@ -48,9 +48,19 @@ export default function StoryCard({ initialStory = 0 }: { initialStory?: number 
   // The prototype holds the finished reveal for 260ms before moving on.
   const advance = useRef<ReturnType<typeof setTimeout>>(undefined);
   useEffect(() => () => clearTimeout(advance.current), [active]);
+  // Pause while a pointer is over the card, as the prototype does. Pointer
+  // events (not CSS :hover) so a tap resumes as soon as the finger lifts —
+  // :hover sticks after a tap on touch screens and froze the story.
+  const [paused, setPaused] = useState(false);
 
   return (
-    <div className="story-card relative aspect-[4/5] w-full max-w-xl overflow-hidden rounded-3xl border border-white/12 bg-brand-navy lg:aspect-[3/4] lg:max-w-none">
+    <div
+      data-paused={paused}
+      onPointerEnter={() => setPaused(true)}
+      onPointerLeave={() => setPaused(false)}
+      onPointerCancel={() => setPaused(false)}
+      className="story-card relative aspect-[4/5] w-full max-w-xl overflow-hidden rounded-3xl border border-white/12 bg-brand-navy sm:aspect-[4/3] lg:aspect-[3/4] lg:max-w-none"
+    >
       {story.before && story.after && (
         <>
           <Image

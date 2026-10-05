@@ -125,7 +125,8 @@ export default function WhatToTransform() {
             })}
           </div>
 
-          <Reveal as="article" delay={40} className="overflow-hidden rounded-3xl border border-stone-200 bg-white">
+          {/* Keyed by tab so each switch replays the fade-up, as in the prototype. */}
+          <Reveal key={current.key} as="article" delay={40} className="overflow-hidden rounded-3xl border border-stone-200 bg-white">
             <div className="relative aspect-[16/10] bg-brand-navy">
               {current.image && (
                 <Image
