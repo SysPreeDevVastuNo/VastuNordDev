@@ -18,11 +18,11 @@ export default function TheProblem() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
           <Reveal>
             <Eyebrow>01 — The Problem</Eyebrow>
-            <h2 className="mt-5 text-[30.4px] font-semibold leading-[1.06] tracking-[-0.0135em] sm:text-[44px] xl:text-[56px]">
+            <h2 className="mt-5 text-[clamp(1.9rem,4.4vw,3.5rem)] font-semibold leading-[1.06] tracking-[-0.0135em]">
               <span className="block text-brand-teal">The hardest part isn&rsquo;t creating.</span>
               <span className="block text-brand-teal/40">It&rsquo;s seeing what&rsquo;s possible.</span>
             </h2>
-            <p className="mt-6 max-w-[512px] leading-7 text-stone-600">
+            <p className="mt-6 max-w-lg text-base leading-7 text-stone-600">
               Design ideas are difficult to explore when they only exist in your head. Whether
               you&rsquo;re transforming a space, changing a detail, or refining an image, VastuNord
               helps you see the possibilities before moving forward.

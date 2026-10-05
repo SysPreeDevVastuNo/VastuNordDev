@@ -20,36 +20,46 @@ const directions = [
 export default function PossibilityGallery() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const [atEnd, setAtEnd] = useState(false);
+  const atEnd = active === directions.length - 1;
 
-  // The active dot follows the left-most card in view, whether the track was
-  // moved by the arrows, the dots, a swipe or a trackpad.
+  // As in the prototype, cards snap to the centre and the active dot follows
+  // whichever card sits closest to the middle of the track — however it moved.
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
+    let frame = 0;
     const update = () => {
-      const card = track.firstElementChild as HTMLElement | null;
-      if (!card) return;
-      const step = card.offsetWidth + parseFloat(getComputedStyle(track).columnGap || "0");
-      const end = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
-      // The last cards can never reach the left edge, so the end of the track
-      // stands in for the final direction.
-      setActive(end ? directions.length - 1 : Math.round(track.scrollLeft / step));
-      setAtEnd(end);
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const mid = track.getBoundingClientRect().left + track.clientWidth / 2;
+        let best = 0;
+        let bestDist = Infinity;
+        Array.from(track.children).forEach((card, i) => {
+          const r = card.getBoundingClientRect();
+          const dist = Math.abs(r.left + r.width / 2 - mid);
+          if (dist < bestDist) {
+            bestDist = dist;
+            best = i;
+          }
+        });
+        setActive(best);
+      });
     };
-    update();
     track.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
     return () => {
+      cancelAnimationFrame(frame);
       track.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
     };
   }, []);
 
   const scrollToIndex = (i: number) => {
     const track = trackRef.current;
-    const card = track?.children[i] as HTMLElement | undefined;
-    if (track && card) track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: "smooth" });
+    const index = Math.min(directions.length - 1, Math.max(0, i));
+    const card = track?.children[index] as HTMLElement | undefined;
+    if (!track || !card) return;
+    const offset = card.getBoundingClientRect().left - track.getBoundingClientRect().left;
+    track.scrollTo({ left: track.scrollLeft + offset - (track.clientWidth - card.offsetWidth) / 2, behavior: "smooth" });
+    setActive(index);
   };
 
   return (
@@ -58,10 +68,10 @@ export default function PossibilityGallery() {
         <div className="flex items-end justify-between gap-6">
           <Reveal className="max-w-[768px]">
             <p className="eyebrow text-white/70">Possibility Explorer</p>
-            <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-white sm:text-[44px] xl:text-[52px]">
+            <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-white">
               Explore possibilities before committing
             </h2>
-            <p className="mt-5 max-w-[576px] leading-7 text-brand-cream/70">
+            <p className="mt-5 max-w-[576px] text-base leading-7 text-brand-cream/70">
               Better decisions come from comparing possibilities. Swipe between directions — this is
               exploration, not a single generated answer.
             </p>
@@ -95,13 +105,13 @@ export default function PossibilityGallery() {
           className="mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {directions.map((d, i) => (
-            <figure key={d.label} className="w-[78%] shrink-0 snap-start md:w-[42%]">
+            <figure key={d.label} className="w-[78%] shrink-0 snap-center sm:w-[58%] lg:w-[42%]">
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-white/12 bg-[#01293a]">
                 <Image
                   src={d.image}
                   alt={`${d.label} direction`}
                   fill
-                  sizes="(min-width: 768px) 490px, 78vw"
+                  sizes="(min-width: 1024px) 490px, (min-width: 640px) 58vw, 78vw"
                   className="object-cover"
                 />
                 <span

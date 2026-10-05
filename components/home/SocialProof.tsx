@@ -37,10 +37,10 @@ export default function SocialProof() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,462.39fr)_minmax(0,625.61fr)] lg:gap-20">
           <Reveal>
             <p className="eyebrow text-white/70">06 — Social Proof</p>
-            <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] sm:text-[44px] xl:text-[52px]">
+            <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em]">
               Built for ideas worth seeing.
             </h2>
-            <p className="mt-5 max-w-[576px] leading-7 text-brand-cream/70">
+            <p className="mt-5 max-w-[576px] text-base leading-7 text-brand-cream/70">
               From everyday home changes to professional design decisions, VastuNord helps people
               explore possibilities before moving forward.
             </p>
@@ -50,7 +50,7 @@ export default function SocialProof() {
             {stats.map((s) => (
               <div key={s.label} className="flex flex-col-reverse border-t border-white/15 pt-5">
                 <dt className="pt-2 text-sm leading-5 text-brand-cream/60">{s.label}</dt>
-                <dd className="font-heading text-[28px] font-semibold leading-[1.5] sm:text-[44px]">
+                <dd className="font-heading text-[clamp(1.75rem,3.5vw,2.75rem)] font-semibold leading-[1.5]">
                   {s.value}
                 </dd>
               </div>

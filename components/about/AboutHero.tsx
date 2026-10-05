@@ -26,7 +26,7 @@ export default function AboutHero() {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,581.05fr)_minmax(0,522.94fr)] lg:gap-16">
           <Reveal>
             <p className="eyebrow text-white/70">Why VastuNord</p>
-            <h1 className="mt-6 text-[35.2px] font-semibold leading-[1.02] tracking-[-0.0135em] text-white sm:text-[52px] xl:text-[72px]">
+            <h1 className="mt-6 max-w-[15ch] text-[clamp(2.2rem,5.4vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.0135em] text-white">
               You shouldn&rsquo;t have to imagine it all in your head.
             </h1>
             <p className="mt-6 max-w-[512px] leading-7 text-brand-cream/75 lg:text-lg">

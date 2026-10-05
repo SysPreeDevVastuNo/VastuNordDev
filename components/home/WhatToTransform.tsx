@@ -73,10 +73,10 @@ export default function WhatToTransform() {
       <PageContainer>
         <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">02 — What Can You Create?</p>
-          <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
+          <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal">
             What do you want to transform?
           </h2>
-          <p className="mt-5 max-w-[576px] leading-7 text-stone-600">
+          <p className="mt-5 max-w-[576px] text-base leading-7 text-stone-600">
             Start with the outcome you have in mind. Choose a direction and VastuNord gives you the
             tools to bring it to life.
           </p>

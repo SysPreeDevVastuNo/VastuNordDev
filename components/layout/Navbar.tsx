@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import Button from "@/components/ui/Button";
 
 const links = [
   { href: "/features", label: "Features" },
@@ -35,7 +36,7 @@ export default function Navbar() {
         scrolled ? "border-stone-200 bg-white/90 backdrop-blur-md" : "border-transparent bg-white"
       )}
     >
-      <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-8 px-6 md:px-10 lg:px-14 xl:h-20">
+      <nav className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-8 px-6 md:px-10 lg:px-14 md:h-20">
         <Link href="/" aria-label="VastuNord home" className="shrink-0">
           <Image
             src="/brand/vastunord-logo.svg"
@@ -43,11 +44,11 @@ export default function Navbar() {
             width={260}
             height={24}
             priority
-            className="h-5 w-auto xl:h-6"
+            className="h-5 w-auto md:h-6"
           />
         </Link>
 
-        <ul className="hidden items-center gap-1 xl:flex">
+        <ul className="hidden items-center gap-1 lg:flex">
           {links.map((link) => (
             <li key={link.href}>
               <Link
@@ -72,7 +73,7 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden items-center gap-3 xl:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <Link href="/contact" className="text-sm leading-5 text-stone-600 hover:text-brand-navy">
             Sign In
           </Link>
@@ -87,7 +88,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="-mr-2 flex size-10 items-center justify-center rounded-full xl:hidden"
+          className="-mr-2 flex size-10 items-center justify-center rounded-full lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
@@ -102,37 +103,41 @@ export default function Navbar() {
         </button>
       </nav>
 
-      {open && (
-        <div className="border-t border-stone-100 bg-white px-6 py-4 xl:hidden">
-          <ul className="flex flex-col gap-4 text-sm leading-5 text-stone-600">
+      {/* Mobile menu slides open by animating its row from 0fr to 1fr, as in the prototype. */}
+      <div
+        className={clsx(
+          "grid bg-white transition-[grid-template-rows] lg:hidden",
+          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        )}
+      >
+        <div className="overflow-hidden" inert={!open}>
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-1 border-t border-stone-200 px-6 py-6 md:px-10">
             {links.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  aria-current={isCurrent(link.href) ? "page" : undefined}
-                  className={clsx(isCurrent(link.href) && "text-brand-orange")}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link href="/contact" onClick={() => setOpen(false)}>
-                Sign In
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                aria-current={isCurrent(link.href) ? "page" : undefined}
+                className={clsx(
+                  "flex items-center justify-between rounded-2xl px-2 py-3 font-heading text-lg font-medium",
+                  isCurrent(link.href) ? "text-brand-orange" : "text-brand-teal"
+                )}
+              >
+                {link.label}
               </Link>
-            </li>
-          </ul>
-          <Link
-            href="/pricing"
-            onClick={() => setOpen(false)}
-            className="mt-4 flex items-center justify-center gap-2 rounded-2xl bg-brand-orange px-5 py-3 text-sm font-semibold leading-5 text-white"
-          >
-            <Image src="/icons/sparkle.svg" alt="" width={16} height={16} />
-            Visualize My Space
-          </Link>
+            ))}
+            <div className="mt-4 flex flex-col gap-2">
+              <Button href="/pricing" onClick={() => setOpen(false)}>
+                <Image src="/icons/sparkle.svg" alt="" width={16} height={16} />
+                Visualize My Space
+              </Button>
+              <Button href="/contact" variant="outline" onClick={() => setOpen(false)}>
+                Sign In
+              </Button>
+            </div>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

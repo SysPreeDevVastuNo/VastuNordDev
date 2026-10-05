@@ -15,13 +15,13 @@ export default function RiskSection() {
   return (
     <Section padded={false} className="py-20 lg:py-28">
       <PageContainer>
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[608fr_480fr] lg:items-center lg:gap-20 [&>*]:min-w-0">
-          <Reveal>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1fr)_30rem] lg:items-center lg:gap-20">
+          <Reveal className="max-w-[48rem]">
             <p className="eyebrow text-stone-500">The Decision Problem</p>
-            <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
+            <h2 className="mt-4 max-w-[38rem] text-[clamp(2rem,4.35vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal">
               Why living room renovations feel risky
             </h2>
-            <p className="max-w-[576px] pt-5 leading-7 text-stone-600">
+            <p className="max-w-[576px] pt-5 text-base leading-7 text-stone-600">
               The living room is the room you live in most, and the hardest to picture changed.
               Swatches and mood boards leave a gap between what you approve and what you get — and
               that gap is where expensive second-guessing lives. You commit to a sofa, a palette,

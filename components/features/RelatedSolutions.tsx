@@ -37,7 +37,7 @@ export default function RelatedSolutions() {
       <PageContainer>
         <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">Related Solutions</p>
-          <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
+          <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal">
             Explore related solutions
           </h2>
         </Reveal>

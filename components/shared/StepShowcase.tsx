@@ -141,7 +141,7 @@ export default function StepShowcase({ steps, tone = "dark" }: { steps: Showcase
         })}
       </ol>
 
-      <Reveal delay={60} className={clsx("overflow-hidden rounded-3xl border", t.card)}>
+      <Reveal delay={60} className={clsx("overflow-hidden rounded-3xl border lg:sticky lg:top-28", t.card)}>
         <div className="relative aspect-[4/3]">
           {current.image && (
             <Image

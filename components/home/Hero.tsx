@@ -29,7 +29,7 @@ export default function Hero({ children }: { children?: React.ReactNode }) {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.82fr)] lg:gap-16">
           <Reveal>
             <Eyebrow light>Visual Design &amp; Transformation</Eyebrow>
-            <h1 className="mt-6 text-[38.4px] font-semibold leading-[0.98] tracking-[-0.0135em] text-white sm:text-[56px] xl:text-[84px]">
+            <h1 className="mt-6 text-[clamp(2.4rem,6.4vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.0135em] text-white">
               See What&rsquo;s Possible.
             </h1>
             <p className="mt-6 max-w-[512px] leading-7 text-brand-cream/75 lg:text-lg">
@@ -48,7 +48,7 @@ export default function Hero({ children }: { children?: React.ReactNode }) {
               </Button>
             </div>
 
-            <p className="mt-9 flex items-center gap-3 font-heading text-sm font-medium leading-5 text-white/80">
+            <p className="mt-9 flex flex-wrap items-center gap-x-3 gap-y-1 font-heading text-sm font-medium leading-5 text-white/80">
               {journey.map((step, i) => (
                 <span key={step} className="contents">
                   {i > 0 && <Image src="/icons/chevron-right-orange.svg" alt="" width={13} height={13} />}

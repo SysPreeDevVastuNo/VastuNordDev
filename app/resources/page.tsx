@@ -1,6 +1,5 @@
 import ResourcesHero from "@/components/resources/ResourcesHero";
-import ResourceFilters from "@/components/resources/ResourceFilters";
-import FeaturedArticles from "@/components/resources/FeaturedArticles";
+import ResourceLibrary from "@/components/resources/ResourceLibrary";
 import TopicGrid from "@/components/resources/TopicGrid";
 import Newsletter from "@/components/resources/Newsletter";
 import ClosingCta from "@/components/shared/ClosingCta";
@@ -9,8 +8,7 @@ export default function ResourcesPage() {
   return (
     <>
       <ResourcesHero />
-      <ResourceFilters />
-      <FeaturedArticles />
+      <ResourceLibrary />
       <TopicGrid />
       <Newsletter />
       <ClosingCta

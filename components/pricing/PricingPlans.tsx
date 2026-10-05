@@ -57,7 +57,7 @@ export default function PricingPlans() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <Reveal className="max-w-[768px]">
             <p className="eyebrow text-stone-500">Plans</p>
-            <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
+            <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal">
               Pay for possibilities, not per render.
             </h2>
           </Reveal>
@@ -118,7 +118,7 @@ export default function PricingPlans() {
               <p className="flex items-baseline gap-3 pt-8">
                 <span
                   className={clsx(
-                    "font-heading text-[36px] font-semibold leading-none lg:text-[56px]",
+                    "font-heading text-[clamp(2.25rem,5vw,3.5rem)] font-semibold leading-none",
                     plan.featured ? "text-white" : "text-brand-teal"
                   )}
                 >

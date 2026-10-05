@@ -20,7 +20,7 @@ export default function TopicGrid() {
       <PageContainer>
         <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">03 — Browse by Topic</p>
-          <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
+          <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal">
             Find the decision you&apos;re facing.
           </h2>
         </Reveal>

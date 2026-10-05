@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import clsx from "clsx";
 import Tabs from "@/components/ui/Tabs";
@@ -80,6 +80,13 @@ export default function PossibilitiesShowcase() {
   const [active, setActive] = useState(categories[0].key);
   const [variation, setVariation] = useState(0);
   const [split, setSplit] = useState(defaultSplit);
+  // As in the prototype, pressing or dragging anywhere on the card moves the divider.
+  const cardRef = useRef<HTMLDivElement>(null);
+  const dragging = useRef(false);
+  const splitAt = (clientX: number) => {
+    const r = cardRef.current?.getBoundingClientRect();
+    if (r) setSplit(Math.min(100, Math.max(0, ((clientX - r.left) / r.width) * 100)));
+  };
   const current = categories.find((c) => c.key === active)!;
   const variationSrc = current.variations?.[variation];
 
@@ -93,10 +100,10 @@ export default function PossibilitiesShowcase() {
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <Reveal className="max-w-[768px]">
             <p className="eyebrow text-stone-500">03 — Possibilities</p>
-            <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
+            <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal">
               See what you can create.
             </h2>
-            <p className="mt-5 max-w-[576px] leading-7 text-stone-600">
+            <p className="mt-5 max-w-[576px] text-base leading-7 text-stone-600">
               Start with a real image and explore how it can transform — from interiors and exteriors
               to fine details, VastuNord generates multiple directions from a single starting point.
             </p>
@@ -112,13 +119,26 @@ export default function PossibilitiesShowcase() {
               setSplit(defaultSplit);
             }}
             wrap={false}
-            className="-mx-6 px-6 md:mx-0 md:px-0"
+            className="-mx-6 px-6 lg:mx-0 lg:px-0"
           />
           </Reveal>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,3fr)] lg:items-center lg:gap-16">
           <Reveal className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-brand-cream shadow-[0_30px_80px_-50px_rgba(1,41,58,0.7)]">
+            <div
+              ref={cardRef}
+              className="absolute inset-0 touch-pan-y select-none"
+              onPointerDown={(e) => {
+                // The slider handles its own drag.
+                if ((e.target as HTMLElement).tagName === "INPUT") return;
+                dragging.current = true;
+                splitAt(e.clientX);
+              }}
+              onPointerMove={(e) => dragging.current && splitAt(e.clientX)}
+              onPointerUp={() => (dragging.current = false)}
+              onPointerLeave={() => (dragging.current = false)}
+            >
             {current.input && (
               <Image
                 src={current.input}
@@ -129,7 +149,7 @@ export default function PossibilitiesShowcase() {
               />
             )}
             {variationSrc && (
-              <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${split}%)` }}>
+              <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - split}% 0 0)` }}>
                 <Image
                   src={variationSrc}
                   alt={`Variation ${variation + 1} direction`}
@@ -156,11 +176,12 @@ export default function PossibilitiesShowcase() {
               type="range"
               min={0}
               max={100}
-              value={split}
+              value={Math.round(split)}
               onChange={(e) => setSplit(Number(e.target.value))}
               aria-label={`Compare Input with Variation ${variation + 1}`}
-              className="absolute inset-0 h-full w-full cursor-ew-resize appearance-none bg-transparent opacity-0"
+              className="absolute inset-x-0 bottom-5 mx-auto w-[70%] accent-brand-orange"
             />
+            </div>
           </Reveal>
 
           <Reveal delay={60}>

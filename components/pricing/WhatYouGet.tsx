@@ -37,7 +37,7 @@ export default function WhatYouGet() {
       <PageContainer>
         <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">02 — What You Get</p>
-          <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
+          <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal">
             Everything you need to decide well.
           </h2>
         </Reveal>

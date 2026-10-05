@@ -56,10 +56,10 @@ export default function ContactForm() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[484fr_604fr] lg:gap-20 [&>*]:min-w-0">
           <Reveal>
             <p className="eyebrow text-stone-500">03 — Send Us a Message</p>
-            <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
+            <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal">
               Tell us about the decision.
             </h2>
-            <p className="max-w-[576px] pt-5 leading-7 text-stone-600">
+            <p className="max-w-[576px] pt-5 text-base leading-7 text-stone-600">
               A photograph, a deadline, or a rough idea is enough to get a useful answer.
             </p>
           </Reveal>

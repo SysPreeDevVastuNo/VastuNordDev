@@ -17,7 +17,7 @@ export default function ResourcesHero() {
       <PageContainer className="flex min-h-[420px] flex-col justify-end pt-28 pb-14 lg:min-h-[520px] lg:pb-20">
         <Reveal className="max-w-[768px]">
           <p className="eyebrow text-brand-orange">01 — Resource Center</p>
-          <h1 className="mt-6 text-[33.6px] font-semibold leading-[1.04] tracking-[-0.0135em] text-white sm:text-[48px] xl:text-[68px]">
+          <h1 className="mt-6 text-[clamp(2.1rem,5.4vw,4.25rem)] font-semibold leading-[1.04] tracking-[-0.0135em] text-white">
             Learn. Explore. Get Inspired.
           </h1>
           <p className="mt-6 max-w-[576px] leading-7 text-brand-cream/75 lg:text-lg">

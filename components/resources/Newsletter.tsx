@@ -32,10 +32,10 @@ export default function Newsletter() {
   return (
     <Section padded={false} className="py-20 lg:py-24">
       <PageContainer>
-        <Reveal className="grid grid-cols-1 gap-8 rounded-3xl border border-stone-200 bg-brand-cream p-8 lg:grid-cols-[546fr_492fr] lg:items-center lg:p-12 [&>*]:min-w-0">
+        <Reveal className="grid grid-cols-1 gap-8 rounded-3xl border border-stone-200 bg-brand-cream p-8 md:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] md:items-center md:p-12 [&>*]:min-w-0">
           <div>
             <p className="eyebrow text-stone-500">04 — Stay Updated</p>
-            <h2 className="mt-4 text-[25.6px] font-semibold leading-[1.25] tracking-[-0.0135em] text-brand-teal lg:text-[36px]">
+            <h2 className="mt-4 text-[clamp(1.6rem,3.2vw,2.25rem)] font-semibold leading-[1.25] tracking-[-0.0135em] text-brand-teal">
               New guides, quietly, once a month.
             </h2>
             <p className="max-w-[448px] pt-4 text-sm leading-7 text-stone-600">

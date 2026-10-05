@@ -44,7 +44,7 @@ export default function Tabs<K extends string>({
 }) {
   const styles = toneStyles[tone];
   return (
-    <div role="tablist" className={clsx("flex", wrap ? "flex-wrap" : "flex-nowrap overflow-x-auto", styles.list, className)}>
+    <div role="tablist" className={clsx("flex", wrap ? "flex-wrap" : "flex-nowrap overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden", styles.list, className)}>
       {tabs.map((tab) => {
         const isActive = tab.key === active;
         return (

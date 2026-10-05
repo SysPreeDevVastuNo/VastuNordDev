@@ -29,10 +29,10 @@ export default function WhyGoPro() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-20">
           <Reveal className="max-w-[768px]">
             <p className="eyebrow text-white/70">03 — Why Go Pro</p>
-            <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-white sm:text-[44px] xl:text-[52px]">
+            <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-white">
               Unlock every possibility.
             </h2>
-            <p className="max-w-[576px] pt-5 leading-7 text-brand-cream/70">
+            <p className="max-w-[576px] pt-5 text-base leading-7 text-brand-cream/70">
               Free answers one question. Pro lets you keep asking until the answer is obvious.
             </p>
           </Reveal>

@@ -13,10 +13,10 @@ export default function WhyWeBuiltIt() {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[minmax(0,572.62fr)_minmax(0,515.38fr)] lg:gap-20">
           <Reveal>
             <p className="eyebrow text-white/70">Why We Built It</p>
-            <h2 className="mt-5 text-[30.4px] font-semibold leading-[1.07] tracking-[-0.0135em] text-white sm:text-[44px] xl:text-[52px]">
+            <h2 className="mt-5 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.07] tracking-[-0.0135em] text-white">
               Seeing a possibility changes the decision.
             </h2>
-            <p className="mt-6 max-w-[512px] leading-7 text-brand-cream/75">
+            <p className="mt-6 max-w-[512px] text-base leading-7 text-brand-cream/75">
               Once you can see an idea, everything becomes easier — comparing, refining, deciding, and
               sharing. That&rsquo;s why VastuNord exists: to make visual exploration possible before
               commitment.

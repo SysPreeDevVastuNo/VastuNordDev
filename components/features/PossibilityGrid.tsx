@@ -20,17 +20,18 @@ export default function PossibilityGrid() {
       <PageContainer>
         <Reveal className="max-w-[768px]">
           <p className="eyebrow text-stone-500">Transformation Gallery</p>
-          <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal sm:text-[44px] xl:text-[52px]">
+          <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-brand-teal">
             See what&apos;s possible
           </h2>
-          <p className="mt-5 max-w-[576px] leading-7 text-stone-600">
+          <p className="mt-5 max-w-[576px] text-base leading-7 text-stone-600">
             Never one final image — always a set of directions, because the point is to compare, not
             to accept.
           </p>
         </Reveal>
 
-        <Reveal delay={80} className="mt-14 grid grid-cols-1 items-start gap-5 lg:grid-cols-[352fr_796fr] [&>*]:min-w-0">
-          <figure className="overflow-hidden rounded-3xl border border-stone-200">
+        {/* The "Before" photo stays pinned while the directions scroll past it. */}
+        <div className="mt-14 grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,22rem)_1fr] lg:items-start [&>*]:min-w-0">
+          <Reveal as="figure" className="overflow-hidden rounded-3xl border border-stone-200 lg:sticky lg:top-24">
             <div className="relative aspect-[4/3]">
               <Image
                 src="/images/features/hero-background.png"
@@ -44,18 +45,18 @@ export default function PossibilityGrid() {
             <figcaption className="px-5 py-4 text-sm leading-6 text-stone-600">
               One living room — and every direction it could take.
             </figcaption>
-          </figure>
+          </Reveal>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-            {directions.map((d) => (
-              <figure key={d.label} className="overflow-hidden rounded-3xl border border-stone-200">
-                <div className="relative aspect-[4/3]">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            {directions.map((d, i) => (
+              <Reveal as="figure" key={d.label} delay={i * 50} className="group overflow-hidden rounded-3xl border border-stone-200">
+                <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={d.image}
                     alt={`Living Room in a ${d.label} direction`}
                     fill
                     sizes="(min-width: 1024px) 388px, (min-width: 768px) 50vw, 100vw"
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                   <span className={`${badge} bg-brand-teal/85 text-white`}>{d.badge}</span>
                 </div>
@@ -63,10 +64,10 @@ export default function PossibilityGrid() {
                   <p className="font-heading text-sm font-medium leading-5 text-brand-teal">{d.label}</p>
                   <p className="pt-1 text-sm leading-6 text-stone-600">{d.caption}</p>
                 </figcaption>
-              </figure>
+              </Reveal>
             ))}
           </div>
-        </Reveal>
+        </div>
       </PageContainer>
     </Section>
   );

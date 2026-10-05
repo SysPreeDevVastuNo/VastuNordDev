@@ -71,7 +71,6 @@
   h3,
   h4 {
     font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
-    text-wrap: balance;
   }
 
   a {
@@ -89,10 +88,9 @@
     cursor: pointer;
   }
 
-  /* No inputs/textareas/selects exist yet — these defaults are here so the
-     Contact and Resources forms (Phase 2) inherit a consistent look instead
-     of each form re-deriving its own border/radius/focus treatment. */
-  input,
+  /* Shared text-field look for the Contact and Resources forms. Sliders,
+     checkboxes and radios are excluded so they keep their native controls. */
+  input:not([type="range"], [type="checkbox"], [type="radio"]),
   textarea,
   select {
     width: 100%;
@@ -111,7 +109,7 @@
     color: var(--color-stone-400);
   }
 
-  input:focus,
+  input:not([type="range"], [type="checkbox"], [type="radio"]):focus,
   textarea:focus,
   select:focus {
     outline: none;

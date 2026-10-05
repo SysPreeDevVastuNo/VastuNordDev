@@ -6,21 +6,18 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 // ZT Nature (Zelow Type) — the Figma body/UI font (nav, paragraphs, buttons).
-// Only Thin/Medium/Black are available locally, so Medium stands in for the
-// 400–600 range the design uses (Regular + SemiBold) until those files are added.
+// Same three faces the prototype serves: Regular (body), Medium, SemiBold.
+// The .otf (CFF) builds, as in the prototype — the .ttf builds carry TrueType
+// hinting, which Windows renders with visibly different letter shapes.
 const ztNature = localFont({
   variable: "--font-zt-nature",
   display: "swap",
-  // Only the faces a page actually renders are fetched; preloading all six
-  // would download ~670KB of TTF on every route.
+  // Only the faces a page actually renders are fetched.
   preload: false,
   src: [
-    { path: "./font/ZTNature-Thin.ttf", weight: "100", style: "normal" },
-    { path: "./font/ZTNature-ThinItalic.ttf", weight: "100", style: "italic" },
-    { path: "./font/ZTNature-Medium.ttf", weight: "400 600", style: "normal" },
-    { path: "./font/ZTNature-MediumItalic.ttf", weight: "400 600", style: "italic" },
-    { path: "./font/ZTNature-Black.ttf", weight: "900", style: "normal" },
-    { path: "./font/ZTNature-BlackItalic.ttf", weight: "900", style: "italic" },
+    { path: "./font/ZTNature-Regular.otf", weight: "400", style: "normal" },
+    { path: "./font/ZTNature-Medium.otf", weight: "500", style: "normal" },
+    { path: "./font/ZTNature-SemiBold.otf", weight: "600", style: "normal" },
   ],
 });
 

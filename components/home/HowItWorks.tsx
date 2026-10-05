@@ -46,10 +46,10 @@ export default function HowItWorks() {
       <PageContainer>
         <Reveal className="max-w-[768px]">
           <p className="eyebrow text-white/70">04 — How It Works</p>
-          <h2 className="mt-4 text-[30.4px] font-semibold leading-[1.08] tracking-[-0.0135em] text-white sm:text-[44px] xl:text-[52px]">
+          <h2 className="mt-4 text-[clamp(1.9rem,4.2vw,3.25rem)] font-semibold leading-[1.08] tracking-[-0.0135em] text-white">
             From idea to visual in four steps.
           </h2>
-          <p className="mt-5 max-w-[576px] leading-7 text-brand-cream/70">
+          <p className="mt-5 max-w-[576px] text-base leading-7 text-brand-cream/70">
             VastuNord adapts the workflow to what you&apos;re trying to create, so you can move from an
             idea to something you can actually see.
           </p>
