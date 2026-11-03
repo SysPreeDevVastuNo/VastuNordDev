@@ -1,5 +1,5 @@
-﻿import PageStub from "@/components/app/PageStub";
+﻿import StudioSearch from "@/app/app/search/StudioSearch";
 
 export default function SearchPage() {
-  return <PageStub code="HS-01 · Search" title="Search" />;
+  return <StudioSearch />;
 }

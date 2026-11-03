@@ -1,5 +1,5 @@
-﻿import PageStub from "@/components/app/PageStub";
+﻿import SharedHub from "@/app/app/shared/SharedHub";
 
 export default function SharedPage() {
-  return <PageStub code="E-S · Shared" title="Shared" />;
+  return <SharedHub />;
 }

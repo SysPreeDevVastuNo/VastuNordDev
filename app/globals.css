@@ -65,10 +65,12 @@
   --color-faint: #a6a09b;
   --color-line: #e7e5e4;
   --color-shell: #fafaf9;
+  --color-cream: #f7f2ec;
   --color-stage: #03151d;
   --color-stage-raised: #082532;
   --radius-control: 16px;
   --radius-card: 24px;
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 @theme inline {
@@ -103,6 +105,11 @@
   h3,
   h4 {
     font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Studio headings run slightly tight, as in the prototype. */
+  .app-shell :is(h1, h2, h3, h4) {
+    letter-spacing: -0.0135em;
   }
 
   a {

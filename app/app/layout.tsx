@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-svh bg-shell">
+    <div className="app-shell flex min-h-svh bg-shell">
       <AppSidebar />
       <div className="flex min-w-0 flex-1 flex-col">
         <AppMobileHeader />

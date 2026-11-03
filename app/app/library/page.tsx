@@ -1,5 +1,5 @@
-﻿import PageStub from "@/components/app/PageStub";
+﻿import ToolLibrary from "@/app/app/library/ToolLibrary";
 
 export default function ToolLibraryPage() {
-  return <PageStub code="WD-01 · Tools" title="Tool library" />;
+  return <ToolLibrary />;
 }

@@ -1,5 +1,5 @@
-﻿import PageStub from "@/components/app/PageStub";
+﻿import ProjectCollection from "@/app/app/projects/ProjectCollection";
 
 export default function ProjectsPage() {
-  return <PageStub code="C-08.02 · Projects" title="Projects" />;
+  return <ProjectCollection />;
 }
