@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Zalando_Sans_Expanded } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 
 // ZT Nature (Zelow Type) — the Figma body/UI font (nav, paragraphs, buttons).
 // Same three faces the prototype serves: Regular (body), Medium, SemiBold.
@@ -44,9 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <noscript>
           <style>{`.reveal{opacity:1;transform:none}`}</style>
         </noscript>
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );

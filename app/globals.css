@@ -50,6 +50,38 @@
   --default-transition-timing-function: var(--ease-soft);
 }
 
+/* App (logged-in product) tokens — values read from the prototype's :root,
+   so its class names (bg-shell, border-line, text-muted, rounded-control…)
+   carry over one-to-one. */
+@theme {
+  --color-navy: #013c55;
+  --color-navy-deep: #042b3c;
+  --color-navy-ink: #01293a;
+  --color-ember: #fb602b;
+  --color-ember-soft: #ff8256;
+  --color-ink: #1c1917;
+  --color-body: #57534d;
+  --color-muted: #79716b;
+  --color-faint: #a6a09b;
+  --color-line: #e7e5e4;
+  --color-shell: #fafaf9;
+  --color-stage: #03151d;
+  --color-stage-raised: #082532;
+  --radius-control: 16px;
+  --radius-card: 24px;
+}
+
+@theme inline {
+  --font-display: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* ---------------------------------------------------------------------- */
 /* Base — element defaults, typography and accessibility states.          */
 /* ---------------------------------------------------------------------- */
