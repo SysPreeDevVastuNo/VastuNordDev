@@ -9,6 +9,9 @@ const appButtonBase =
 export const appButtonPrimary = `${appButtonBase} bg-ember text-white hover:bg-ember-soft`;
 
 // Translucent white-on-navy button for dark panels (Home start card).
+// Navy fill for a confirming action that is not destructive (Save, Archive, Restore).
+export const appButtonNavy = `${appButtonBase} bg-navy text-white hover:bg-navy-ink`;
+
 // White button with a hairline border for secondary actions on light surfaces.
 export const appButtonOutline = `${appButtonBase} border border-line bg-white text-navy hover:border-navy/40 hover:bg-shell`;
 

@@ -1,0 +1,1947 @@
+{
+ "room-reimagination": {
+  "id": "room-reimagination",
+  "category": "interior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "A calmer living room — pale oak floors, low linen seating, morning light"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "roomType",
+    "label": "Room type",
+    "options": [
+     "Auto-detect",
+     "Living room",
+     "Bedroom",
+     "Kitchen",
+     "Bathroom",
+     "Dining",
+     "Office",
+     "Hallway"
+    ]
+   },
+   {
+    "kind": "grid",
+    "id": "roomStyle",
+    "label": "Room style",
+    "options": [
+     {
+      "value": "Scandinavian",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/f34b431ae201a5c6d5ac90baed09336196f2df96-1080x608.jpg"
+     },
+     {
+      "value": "Japandi",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/a41988e0dce447ac8c380d22efac2f34a751af41-1080x720.jpg"
+     },
+     {
+      "value": "Modern luxury",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/c2161214bb390b5a6fb54bd14c1de74e7e2131e3-1535x1024.png"
+     },
+     {
+      "value": "Minimalist",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/c6dfafbcf288818cf0bf88bb2db36c9d33db780d-1536x1024.png"
+     },
+     {
+      "value": "Industrial",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/7c609fd51d189961d30180a883b22a036064b3c1-1024x576.png"
+     },
+     {
+      "value": "Biophilic",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/77045f942e5fb6f35501791994a9ec2474dea837-1200x675.png"
+     }
+    ]
+   },
+   {
+    "kind": "palette",
+    "id": "palette",
+    "label": "Colour palette",
+    "options": [
+     {
+      "value": "Auto",
+      "swatch": []
+     },
+     {
+      "value": "Pale oak",
+      "swatch": [
+       "#e9e1d6",
+       "#c8b9a6",
+       "#8e7f6d"
+      ]
+     },
+     {
+      "value": "Ink & cream",
+      "swatch": [
+       "#f7f2ec",
+       "#57534d",
+       "#1c1917"
+      ]
+     },
+     {
+      "value": "Ember",
+      "swatch": [
+       "#f7f2ec",
+       "#fb602b",
+       "#013c55"
+      ]
+     },
+     {
+      "value": "Sea glass",
+      "swatch": [
+       "#dfe9e6",
+       "#9ab5ad",
+       "#41615a"
+      ]
+     },
+     {
+      "value": "Clay",
+      "swatch": [
+       "#efe0d5",
+       "#c98f6c",
+       "#7a4a34"
+      ]
+     },
+     {
+      "value": "Deep forest",
+      "swatch": [
+       "#e3e8df",
+       "#7d9273",
+       "#2f402c"
+      ]
+     }
+    ]
+   },
+   {
+    "kind": "group",
+    "id": "interiorSettings",
+    "label": "Interior settings",
+    "controls": [
+     {
+      "kind": "chips",
+      "id": "floorFinish",
+      "label": "Floor finish",
+      "options": [
+       "Keep existing",
+       "Pale oak",
+       "Walnut",
+       "Concrete",
+       "Stone",
+       "Terrazzo"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "furnishing",
+      "label": "Furnishing",
+      "options": [
+       "Keep existing",
+       "Light",
+       "Balanced",
+       "Full"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "plants",
+      "label": "Indoor plants",
+      "options": [
+       "Auto",
+       "None",
+       "A few",
+       "Generous"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "accessories",
+      "label": "Accessories",
+      "options": [
+       "Auto",
+       "Minimal",
+       "Considered",
+       "Layered"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "lighting",
+      "label": "Lighting",
+      "options": [
+       "Auto",
+       "Natural only",
+       "Warm lamps",
+       "Bright",
+       "Moody"
+      ]
+     }
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "timeOfDay",
+    "label": "Time of day",
+    "options": [
+     "As photographed",
+     "Morning",
+     "Midday",
+     "Golden hour",
+     "Blue hour",
+     "Night"
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "aspect",
+    "label": "Aspect ratio",
+    "options": [
+     "Original",
+     "1:1",
+     "4:3",
+     "3:2",
+     "16:9"
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "Editing",
+   "options": [
+    {
+     "id": "child-safe",
+     "label": "Make it child safe",
+     "hint": "Rounded edges, no loose glass, nothing to climb.",
+     "icon": "ShieldCheck",
+     "kind": "toggle"
+    },
+    {
+     "id": "annotate",
+     "label": "Annotate the design",
+     "hint": "Draw on the photo to point at what matters.",
+     "icon": "PencilSimple",
+     "mode": "annotate",
+     "kind": "canvas"
+    },
+    {
+     "id": "analyze-area",
+     "label": "Analyze an area",
+     "hint": "Mark a region and describe just that part.",
+     "icon": "Selection",
+     "mode": "select",
+     "kind": "canvas"
+    },
+    {
+     "id": "suggestions",
+     "label": "VastuNord suggestions",
+     "hint": "A few directions picked from the photo.",
+     "icon": "Sparkle",
+     "kind": "suggestions"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate room",
+   "result": "Generated result",
+   "modify": "Modify prompt & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "furniture-refresh": {
+  "id": "furniture-refresh",
+  "category": "interior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Swap the sofa for something low and linen, keep everything else"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "roomType",
+    "label": "Room type",
+    "options": [
+     "Auto-detect",
+     "Living room",
+     "Bedroom",
+     "Kitchen",
+     "Bathroom",
+     "Dining",
+     "Office",
+     "Hallway"
+    ]
+   },
+   {
+    "kind": "grid",
+    "id": "roomStyle",
+    "label": "Room style",
+    "options": [
+     {
+      "value": "Scandinavian",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/f34b431ae201a5c6d5ac90baed09336196f2df96-1080x608.jpg"
+     },
+     {
+      "value": "Japandi",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/a41988e0dce447ac8c380d22efac2f34a751af41-1080x720.jpg"
+     },
+     {
+      "value": "Modern luxury",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/c2161214bb390b5a6fb54bd14c1de74e7e2131e3-1535x1024.png"
+     },
+     {
+      "value": "Minimalist",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/c6dfafbcf288818cf0bf88bb2db36c9d33db780d-1536x1024.png"
+     },
+     {
+      "value": "Industrial",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/7c609fd51d189961d30180a883b22a036064b3c1-1024x576.png"
+     },
+     {
+      "value": "Biophilic",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/77045f942e5fb6f35501791994a9ec2474dea837-1200x675.png"
+     }
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "timeOfDay",
+    "label": "Time of day",
+    "options": [
+     "As photographed",
+     "Morning",
+     "Midday",
+     "Golden hour",
+     "Blue hour",
+     "Night"
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "Editing",
+   "options": [
+    {
+     "id": "child-safe",
+     "label": "Make it child safe",
+     "hint": "Rounded edges, no loose glass, nothing to climb.",
+     "icon": "ShieldCheck",
+     "kind": "toggle"
+    },
+    {
+     "id": "select-furniture",
+     "label": "Add or remove furniture",
+     "hint": "Select a piece on the photo.",
+     "icon": "Selection",
+     "mode": "select",
+     "kind": "canvas"
+    },
+    {
+     "id": "clean-up",
+     "label": "Clean up the room",
+     "hint": "Clear clutter before restyling.",
+     "icon": "Broom",
+     "kind": "oneclick"
+    },
+    {
+     "id": "asset-furniture",
+     "label": "Add furniture from assets",
+     "hint": "Place a piece you have uploaded.",
+     "icon": "Armchair",
+     "kind": "asset",
+     "assetType": "furniture"
+    },
+    {
+     "id": "one-click",
+     "label": "One-click refresh",
+     "hint": "Let VastuNord choose the direction.",
+     "icon": "MagicWand",
+     "kind": "oneclick"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate furniture refresh",
+   "result": "Generated result",
+   "modify": "Modify prompt / edit & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "decor-redefinition": {
+  "id": "decor-redefinition",
+  "category": "interior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Quieter decor — fewer objects, warmer textiles"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "decorStyle",
+    "label": "Decor style",
+    "options": [
+     "Warm minimal",
+     "Gallery",
+     "Layered textile",
+     "Mid-century",
+     "Coastal",
+     "Monochrome"
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "aspect",
+    "label": "Aspect ratio",
+    "options": [
+     "Original",
+     "1:1",
+     "4:3",
+     "3:2",
+     "16:9"
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "Editing",
+   "options": [
+    {
+     "id": "child-safe",
+     "label": "Make it child safe",
+     "hint": "Rounded edges, no loose glass, nothing to climb.",
+     "icon": "ShieldCheck",
+     "kind": "toggle"
+    },
+    {
+     "id": "select-decor",
+     "label": "Add or remove decor",
+     "hint": "Select an object on the photo.",
+     "icon": "Selection",
+     "mode": "select",
+     "kind": "canvas"
+    },
+    {
+     "id": "asset-decor",
+     "label": "Add decor from assets",
+     "hint": "Place something you have uploaded.",
+     "icon": "Stack",
+     "kind": "asset",
+     "assetType": "decor"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate decor design",
+   "result": "Generated result",
+   "modify": "Modify decor & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "material-refinement": {
+  "id": "material-refinement",
+  "category": "interior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Warmer materials — oak instead of laminate, matt instead of gloss"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "palette",
+    "id": "palette",
+    "label": "Colour palette",
+    "options": [
+     {
+      "value": "Auto",
+      "swatch": []
+     },
+     {
+      "value": "Pale oak",
+      "swatch": [
+       "#e9e1d6",
+       "#c8b9a6",
+       "#8e7f6d"
+      ]
+     },
+     {
+      "value": "Ink & cream",
+      "swatch": [
+       "#f7f2ec",
+       "#57534d",
+       "#1c1917"
+      ]
+     },
+     {
+      "value": "Ember",
+      "swatch": [
+       "#f7f2ec",
+       "#fb602b",
+       "#013c55"
+      ]
+     },
+     {
+      "value": "Sea glass",
+      "swatch": [
+       "#dfe9e6",
+       "#9ab5ad",
+       "#41615a"
+      ]
+     },
+     {
+      "value": "Clay",
+      "swatch": [
+       "#efe0d5",
+       "#c98f6c",
+       "#7a4a34"
+      ]
+     },
+     {
+      "value": "Deep forest",
+      "swatch": [
+       "#e3e8df",
+       "#7d9273",
+       "#2f402c"
+      ]
+     }
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "Editing",
+   "options": [
+    {
+     "id": "child-safe",
+     "label": "Make it child safe",
+     "hint": "Rounded edges, no loose glass, nothing to climb.",
+     "icon": "ShieldCheck",
+     "kind": "toggle"
+    },
+    {
+     "id": "material-edit",
+     "label": "Edit a material or object",
+     "hint": "Select a surface to change.",
+     "icon": "Selection",
+     "mode": "select",
+     "kind": "canvas"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate material refinement",
+   "result": "Generated result",
+   "modify": "Modify prompt / edit & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "seasonal-styling": {
+  "id": "seasonal-styling",
+  "category": "interior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Dress the room for the season without changing the furniture"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "roomType",
+    "label": "Room type",
+    "options": [
+     "Auto-detect",
+     "Living room",
+     "Bedroom",
+     "Kitchen",
+     "Bathroom",
+     "Dining",
+     "Office",
+     "Hallway"
+    ]
+   },
+   {
+    "kind": "grid",
+    "id": "roomStyle",
+    "label": "Room style",
+    "options": [
+     {
+      "value": "Scandinavian",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/f34b431ae201a5c6d5ac90baed09336196f2df96-1080x608.jpg"
+     },
+     {
+      "value": "Japandi",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/a41988e0dce447ac8c380d22efac2f34a751af41-1080x720.jpg"
+     },
+     {
+      "value": "Modern luxury",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/c2161214bb390b5a6fb54bd14c1de74e7e2131e3-1535x1024.png"
+     },
+     {
+      "value": "Minimalist",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/c6dfafbcf288818cf0bf88bb2db36c9d33db780d-1536x1024.png"
+     },
+     {
+      "value": "Industrial",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/7c609fd51d189961d30180a883b22a036064b3c1-1024x576.png"
+     },
+     {
+      "value": "Biophilic",
+      "preview": "https://cdn.sanity.io/images/5mo9wf71/production/77045f942e5fb6f35501791994a9ec2474dea837-1200x675.png"
+     }
+    ]
+   },
+   {
+    "kind": "palette",
+    "id": "palette",
+    "label": "Colour palette",
+    "options": [
+     {
+      "value": "Auto",
+      "swatch": []
+     },
+     {
+      "value": "Pale oak",
+      "swatch": [
+       "#e9e1d6",
+       "#c8b9a6",
+       "#8e7f6d"
+      ]
+     },
+     {
+      "value": "Ink & cream",
+      "swatch": [
+       "#f7f2ec",
+       "#57534d",
+       "#1c1917"
+      ]
+     },
+     {
+      "value": "Ember",
+      "swatch": [
+       "#f7f2ec",
+       "#fb602b",
+       "#013c55"
+      ]
+     },
+     {
+      "value": "Sea glass",
+      "swatch": [
+       "#dfe9e6",
+       "#9ab5ad",
+       "#41615a"
+      ]
+     },
+     {
+      "value": "Clay",
+      "swatch": [
+       "#efe0d5",
+       "#c98f6c",
+       "#7a4a34"
+      ]
+     },
+     {
+      "value": "Deep forest",
+      "swatch": [
+       "#e3e8df",
+       "#7d9273",
+       "#2f402c"
+      ]
+     }
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "season",
+    "label": "Season",
+    "options": [
+     "Spring",
+     "Summer",
+     "Autumn",
+     "Winter"
+    ]
+   }
+  ],
+  "labels": {
+   "generate": "Generate seasonal styling",
+   "result": "Generated result",
+   "modify": "Modify settings & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "virtual-home-staging": {
+  "id": "virtual-home-staging",
+  "category": "staging",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Stage for a young family — warm, lived-in, not showroom"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "stagingStyle",
+    "label": "Staging style",
+    "options": [
+     "Family",
+     "Young professional",
+     "Downsizer",
+     "Luxury",
+     "Neutral"
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "Staging",
+   "options": [
+    {
+     "id": "child-safe",
+     "label": "Make it child safe",
+     "hint": "Rounded edges, no loose glass, nothing to climb.",
+     "icon": "ShieldCheck",
+     "kind": "toggle"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate staged room",
+   "result": "Generated result",
+   "modify": "Modify prompt / style & regenerate"
+  },
+  "allowBatchExport": true,
+  "engine": "generative"
+ },
+ "lighting-reimagination": {
+  "id": "lighting-reimagination",
+  "category": "interior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Warmer, lower light — lamps rather than ceiling spots"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "roomType",
+    "label": "Room type",
+    "options": [
+     "Auto-detect",
+     "Living room",
+     "Bedroom",
+     "Kitchen",
+     "Bathroom",
+     "Dining",
+     "Office",
+     "Hallway"
+    ]
+   },
+   {
+    "kind": "group",
+    "id": "lightingSettings",
+    "label": "Lighting settings",
+    "controls": [
+     {
+      "kind": "slider",
+      "id": "kelvin",
+      "label": "Colour temperature",
+      "min": 2200,
+      "max": 5000,
+      "value": 2700,
+      "unit": "K"
+     },
+     {
+      "kind": "slider",
+      "id": "brightness",
+      "label": "Brightness",
+      "min": 10,
+      "max": 100,
+      "value": 60,
+      "unit": "%"
+     },
+     {
+      "kind": "chips",
+      "id": "layers",
+      "label": "Layers of light",
+      "options": [
+       "Ambient only",
+       "Ambient + task",
+       "Fully layered"
+      ]
+     }
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "fixtureStyle",
+    "label": "Fixture style",
+    "options": [
+     "Keep existing",
+     "Pendant",
+     "Recessed",
+     "Track",
+     "Sconce",
+     "Floor lamp",
+     "Statement"
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "Lighting",
+   "options": [
+    {
+     "id": "asset-lighting",
+     "label": "Add lighting from assets",
+     "hint": "Place a fixture you have uploaded.",
+     "icon": "Lightbulb",
+     "kind": "asset",
+     "assetType": "lighting"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate lighting design",
+   "result": "Generated result",
+   "modify": "Modify lighting & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "outdoor-visualization": {
+  "id": "outdoor-visualization",
+  "category": "exterior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "A terrace that works in the evening — stone, planting, low light"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "timeOfDay",
+    "label": "Time of day",
+    "options": [
+     "As photographed",
+     "Morning",
+     "Midday",
+     "Golden hour",
+     "Blue hour",
+     "Night"
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "outdoorStyle",
+    "label": "Outdoor style",
+    "options": [
+     "Naturalistic",
+     "Formal",
+     "Mediterranean",
+     "Nordic",
+     "Desert",
+     "Tropical"
+    ]
+   },
+   {
+    "kind": "slider",
+    "id": "lightingDensity",
+    "label": "Outdoor lighting density",
+    "min": 0,
+    "max": 100,
+    "value": 30,
+    "unit": "%"
+   },
+   {
+    "kind": "group",
+    "id": "surroundings",
+    "label": "Content & surroundings",
+    "controls": [
+     {
+      "kind": "chips",
+      "id": "people",
+      "label": "People",
+      "options": [
+       "Keep existing",
+       "None",
+       "A few",
+       "Many"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "siteContext",
+      "label": "Site context",
+      "options": [
+       "Auto",
+       "Urban",
+       "Suburban",
+       "Nature"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "greenery",
+      "label": "Greenery",
+      "options": [
+       "Keep existing",
+       "Sparse",
+       "Balanced",
+       "Lush"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "vehicles",
+      "label": "Vehicles",
+      "options": [
+       "Keep existing",
+       "None",
+       "A few",
+       "Many"
+      ]
+     }
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "weather",
+    "label": "Weather",
+    "options": [
+     "As photographed",
+     "Clear",
+     "Overcast",
+     "Hazy",
+     "Rain",
+     "Snow"
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "AI assistance",
+   "options": [
+    {
+     "id": "suggestions",
+     "label": "VastuNord suggestions",
+     "hint": "A few directions picked from the photo.",
+     "icon": "Sparkle",
+     "kind": "suggestions"
+    },
+    {
+     "id": "analyze-area",
+     "label": "Analyze an area",
+     "hint": "Mark a region and describe just that part.",
+     "icon": "Selection",
+     "mode": "select",
+     "kind": "canvas"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate outdoor visualization",
+   "result": "Generated result",
+   "modify": "Modify settings & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "hardscape-design": {
+  "id": "hardscape-design",
+  "category": "exterior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "zones": {
+   "label": "Surfaces",
+   "hint": "Tap each surface you want to redesign — the terrace, a path, the steps, a wall.",
+   "types": [
+    {
+     "value": "Terrace",
+     "materials": [
+      "Natural stone",
+      "Porcelain",
+      "Concrete slab",
+      "Clay brick"
+     ],
+     "patterns": [
+      "Running bond",
+      "Herringbone",
+      "Random",
+      "Stack bond"
+     ]
+    },
+    {
+     "value": "Path",
+     "materials": [
+      "Natural stone",
+      "Gravel",
+      "Clay brick",
+      "Stepping stones"
+     ],
+     "patterns": [
+      "Running bond",
+      "Herringbone",
+      "Random"
+     ]
+    },
+    {
+     "value": "Driveway",
+     "materials": [
+      "Block paving",
+      "Resin-bound gravel",
+      "Concrete",
+      "Gravel"
+     ],
+     "patterns": [
+      "Herringbone",
+      "Running bond",
+      "Plain"
+     ]
+    },
+    {
+     "value": "Decking",
+     "materials": [
+      "Timber",
+      "Composite"
+     ],
+     "patterns": [
+      "Straight",
+      "Diagonal",
+      "Picture frame"
+     ]
+    },
+    {
+     "value": "Steps",
+     "materials": [
+      "Natural stone",
+      "Timber",
+      "Concrete",
+      "Clay brick"
+     ],
+     "patterns": [
+      "Solid treads",
+      "Floating"
+     ]
+    },
+    {
+     "value": "Retaining wall",
+     "materials": [
+      "Natural stone",
+      "Gabion",
+      "Rendered block",
+      "Timber sleepers"
+     ],
+     "patterns": [
+      "Coursed",
+      "Dry-stacked",
+      "Smooth"
+     ]
+    },
+    {
+     "value": "Edging",
+     "materials": [
+      "Steel",
+      "Stone setts",
+      "Timber",
+      "Clay brick"
+     ],
+     "patterns": [
+      "Flush",
+      "Raised"
+     ]
+    }
+   ]
+  },
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Optional — anything the surfaces do not say, e.g. keep the existing steps…"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "timeOfDay",
+    "label": "Time of day",
+    "options": [
+     "As photographed",
+     "Morning",
+     "Midday",
+     "Golden hour",
+     "Blue hour",
+     "Night"
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "outdoorStyle",
+    "label": "Outdoor style",
+    "options": [
+     "Naturalistic",
+     "Formal",
+     "Mediterranean",
+     "Nordic",
+     "Desert",
+     "Tropical"
+    ]
+   },
+   {
+    "kind": "slider",
+    "id": "lightingDensity",
+    "label": "Outdoor lighting density",
+    "min": 0,
+    "max": 100,
+    "value": 30,
+    "unit": "%"
+   },
+   {
+    "kind": "group",
+    "id": "surroundings",
+    "label": "Content & surroundings",
+    "controls": [
+     {
+      "kind": "chips",
+      "id": "people",
+      "label": "People",
+      "options": [
+       "Keep existing",
+       "None",
+       "A few",
+       "Many"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "siteContext",
+      "label": "Site context",
+      "options": [
+       "Auto",
+       "Urban",
+       "Suburban",
+       "Nature"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "greenery",
+      "label": "Greenery",
+      "options": [
+       "Keep existing",
+       "Sparse",
+       "Balanced",
+       "Lush"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "vehicles",
+      "label": "Vehicles",
+      "options": [
+       "Keep existing",
+       "None",
+       "A few",
+       "Many"
+      ]
+     }
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "weather",
+    "label": "Weather",
+    "options": [
+     "As photographed",
+     "Clear",
+     "Overcast",
+     "Hazy",
+     "Rain",
+     "Snow"
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "Surfaces",
+   "short": "Surfaces",
+   "options": [
+    {
+     "id": "mark-surfaces",
+     "label": "Mark surfaces",
+     "hint": "Tap each surface on the photo, then set what it becomes.",
+     "icon": "Selection",
+     "mode": "zone",
+     "kind": "canvas"
+    },
+    {
+     "id": "suggestions",
+     "label": "VastuNord suggestions",
+     "hint": "A few directions picked from the photo.",
+     "icon": "Sparkle",
+     "kind": "suggestions"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate hardscape design",
+   "result": "Generated result",
+   "modify": "Modify surfaces & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "garden-design": {
+  "id": "garden-design",
+  "category": "exterior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Soften the edges — deep borders, gravel path, a tree for shade"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "outdoorStyle",
+    "label": "Outdoor style",
+    "options": [
+     "Naturalistic",
+     "Formal",
+     "Mediterranean",
+     "Nordic",
+     "Desert",
+     "Tropical"
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "outdoorArea",
+    "label": "Outdoor area",
+    "options": [
+     "Whole garden",
+     "Borders",
+     "Lawn",
+     "Terrace",
+     "Front"
+    ]
+   },
+   {
+    "kind": "toggle",
+    "id": "touchUp",
+    "label": "Garden touch-up",
+    "hint": "Tidy planting and edges without redesigning."
+   }
+  ],
+  "preActions": {
+   "label": "AI assistance",
+   "options": [
+    {
+     "id": "suggestions",
+     "label": "VastuNord suggestions",
+     "hint": "A few directions picked from the photo.",
+     "icon": "Sparkle",
+     "kind": "suggestions"
+    },
+    {
+     "id": "analyze-area",
+     "label": "Analyze an area",
+     "hint": "Mark a region and describe just that part.",
+     "icon": "Selection",
+     "mode": "select",
+     "kind": "canvas"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate garden design",
+   "result": "Generated result",
+   "modify": "Modify design & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "pool-redesign": {
+  "id": "pool-redesign",
+  "category": "exterior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "A quieter pool — dark lining, stone coping, planting to the edge"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "poolType",
+    "label": "Pool type",
+    "options": [
+     "Infinity",
+     "Lap",
+     "Plunge",
+     "Natural",
+     "Courtyard"
+    ]
+   },
+   {
+    "kind": "group",
+    "id": "poolConfiguration",
+    "label": "Pool configuration",
+    "controls": [
+     {
+      "kind": "chips",
+      "id": "poolStyle",
+      "label": "Style",
+      "options": [
+       "Contemporary",
+       "Natural",
+       "Resort",
+       "Classic"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "construction",
+      "label": "Construction",
+      "options": [
+       "In-ground",
+       "Raised",
+       "Partially raised"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "shape",
+      "label": "Shape",
+      "options": [
+       "Rectangular",
+       "L-shape",
+       "Freeform",
+       "Circular"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "material",
+      "label": "Material",
+      "options": [
+       "Tile",
+       "Plaster",
+       "Pebble",
+       "Stone"
+      ]
+     }
+    ]
+   }
+  ],
+  "labels": {
+   "generate": "Generate pool design",
+   "result": "Generated result",
+   "modify": "Modify pool design & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "sky-transformation": {
+  "id": "sky-transformation",
+  "category": "exterior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "A softer sky — late afternoon, high cloud"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "timeOfDay",
+    "label": "Time of day",
+    "options": [
+     "Morning",
+     "Midday",
+     "Golden hour",
+     "Blue hour",
+     "Night"
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "weather",
+    "label": "Weather",
+    "options": [
+     "Clear",
+     "Overcast",
+     "Hazy",
+     "Rain",
+     "Snow"
+    ]
+   },
+   {
+    "kind": "slider",
+    "id": "cloudIntensity",
+    "label": "Cloud intensity",
+    "min": 0,
+    "max": 100,
+    "value": 45,
+    "unit": "%"
+   },
+   {
+    "kind": "slider",
+    "id": "skySaturation",
+    "label": "Sky saturation",
+    "min": 0,
+    "max": 100,
+    "value": 50,
+    "unit": "%"
+   }
+  ],
+  "labels": {
+   "generate": "Generate sky transformation",
+   "result": "Generated result",
+   "modify": "Modify sky settings & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "seasonal-transformation": {
+  "id": "seasonal-transformation",
+  "category": "exterior",
+  "supportsReferenceImage": true,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Show it in late autumn, low sun"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "chips",
+    "id": "timeOfDay",
+    "label": "Time of day",
+    "options": [
+     "As photographed",
+     "Morning",
+     "Midday",
+     "Golden hour",
+     "Blue hour",
+     "Night"
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "season",
+    "label": "Season",
+    "options": [
+     "Spring",
+     "Summer",
+     "Autumn",
+     "Winter"
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "snow",
+    "label": "Snow cover",
+    "options": [
+     "None",
+     "Frost",
+     "Light snow",
+     "Heavy snow"
+    ]
+   },
+   {
+    "kind": "group",
+    "id": "sceneElements",
+    "label": "Scene elements",
+    "controls": [
+     {
+      "kind": "chips",
+      "id": "people",
+      "label": "People",
+      "options": [
+       "Keep existing",
+       "None",
+       "A few",
+       "Busy"
+      ]
+     },
+     {
+      "kind": "chips",
+      "id": "vehicles",
+      "label": "Vehicles",
+      "options": [
+       "Keep existing",
+       "None",
+       "Parked",
+       "Passing"
+      ]
+     }
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "Scene elements",
+   "options": [
+    {
+     "id": "adjust-people",
+     "label": "Adjust people",
+     "hint": "How busy the scene should feel.",
+     "icon": "UsersThree",
+     "kind": "oneclick"
+    },
+    {
+     "id": "adjust-vehicles",
+     "label": "Adjust vehicles",
+     "hint": "Cars parked, passing, or none.",
+     "icon": "Car",
+     "kind": "oneclick"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate seasonal transformation",
+   "result": "Generated result",
+   "modify": "Modify season & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "object-placement": {
+  "id": "object-placement",
+  "category": "exterior",
+  "supportsReferenceImage": false,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Place it near the steps, catching the afternoon light"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   }
+  ],
+  "labels": {
+   "generate": "Generate object placement",
+   "result": "Generated result",
+   "modify": "Modify object & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "resolution-enhancement": {
+  "id": "resolution-enhancement",
+  "category": "enhancement",
+  "supportsReferenceImage": false,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Sharper and cleaner, print-ready"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "method",
+    "id": "method",
+    "label": "Enhancement method",
+    "options": [
+     {
+      "value": "Auto enhance",
+      "hint": "Upscaled and cleaned up in one pass.",
+      "reveals": [
+       {
+        "kind": "chips",
+        "id": "upscale",
+        "label": "Upscale",
+        "options": [
+         "Original size",
+         "2×",
+         "4×"
+        ]
+       }
+      ]
+     },
+     {
+      "value": "Manual controls",
+      "hint": "Set each adjustment yourself.",
+      "reveals": [
+       {
+        "kind": "slider",
+        "id": "noise",
+        "label": "Noise reduction",
+        "min": 0,
+        "max": 100,
+        "value": 0
+       },
+       {
+        "kind": "slider",
+        "id": "sharpness",
+        "label": "Sharpness",
+        "min": 0,
+        "max": 100,
+        "value": 0
+       },
+       {
+        "kind": "slider",
+        "id": "brightness",
+        "label": "Brightness",
+        "min": -100,
+        "max": 100,
+        "value": 0
+       },
+       {
+        "kind": "slider",
+        "id": "contrast",
+        "label": "Contrast",
+        "min": -100,
+        "max": 100,
+        "value": 0
+       },
+       {
+        "kind": "slider",
+        "id": "saturation",
+        "label": "Saturation",
+        "min": -100,
+        "max": 100,
+        "value": 0
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "kind": "chips",
+    "id": "filter",
+    "label": "Image filter",
+    "options": [
+     "None",
+     "Natural",
+     "Warm",
+     "Cool",
+     "Matte",
+     "Mono"
+    ]
+   },
+   {
+    "kind": "group",
+    "id": "framing",
+    "label": "Crop, rotate & flip",
+    "controls": [
+     {
+      "kind": "chips",
+      "id": "crop",
+      "label": "Crop",
+      "options": [
+       "Original",
+       "1:1",
+       "4:3",
+       "3:2",
+       "16:9"
+      ]
+     },
+     {
+      "kind": "slider",
+      "id": "straighten",
+      "label": "Straighten",
+      "min": -15,
+      "max": 15,
+      "value": 0,
+      "unit": "°"
+     },
+     {
+      "kind": "toggle",
+      "id": "flipH",
+      "label": "Flip horizontal"
+     },
+     {
+      "kind": "toggle",
+      "id": "flipV",
+      "label": "Flip vertical"
+     }
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "Framing",
+   "options": [
+    {
+     "id": "transform",
+     "label": "Crop, rotate or flip",
+     "hint": "Set the frame before enhancing.",
+     "icon": "Crop",
+     "mode": "transform",
+     "kind": "canvas"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate enhanced image",
+   "result": "Enhanced result",
+   "modify": "Modify enhancement & reprocess"
+  },
+  "allowBatchExport": false,
+  "engine": "hybrid"
+ },
+ "visual-cleanup": {
+  "id": "visual-cleanup",
+  "category": "enhancement",
+  "supportsReferenceImage": false,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Remove the bins and the cable across the wall"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "method",
+    "id": "method",
+    "label": "Cleanup method",
+    "options": [
+     {
+      "value": "AI object editing",
+      "hint": "Tap things to remove or change."
+     },
+     {
+      "value": "Brush and delete",
+      "hint": "Paint over what should go."
+     }
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "Editing",
+   "options": [
+    {
+     "id": "erase",
+     "label": "Brush markup & delete",
+     "hint": "Paint the areas to remove.",
+     "icon": "Eraser",
+     "mode": "erase",
+     "kind": "canvas"
+    },
+    {
+     "id": "select-object",
+     "label": "Select an object",
+     "hint": "Tap the thing to remove.",
+     "icon": "Selection",
+     "mode": "select",
+     "kind": "canvas"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate cleaned image",
+   "result": "Cleaned result",
+   "modify": "Modify cleanup & regenerate"
+  },
+  "allowBatchExport": false,
+  "engine": "generative"
+ },
+ "perspective-correction": {
+  "id": "perspective-correction",
+  "category": "enhancement",
+  "supportsReferenceImage": false,
+  "supportsMultiImage": true,
+  "config": [
+   {
+    "kind": "prompt",
+    "id": "prompt",
+    "label": "Describe the change",
+    "placeholder": "Straighten the verticals, keep the framing"
+   },
+   {
+    "kind": "negative",
+    "id": "negative",
+    "label": "Anything to avoid?",
+    "placeholder": "Clutter, harsh lighting, busy patterns…"
+   },
+   {
+    "kind": "method",
+    "id": "method",
+    "label": "Correction method",
+    "options": [
+     {
+      "value": "Fix distortion",
+      "hint": "Straighten converging verticals.",
+      "reveals": [
+       {
+        "kind": "slider",
+        "id": "vertical",
+        "label": "Vertical",
+        "min": -100,
+        "max": 100,
+        "value": 0
+       },
+       {
+        "kind": "slider",
+        "id": "horizontal",
+        "label": "Horizontal",
+        "min": -100,
+        "max": 100,
+        "value": 0
+       }
+      ]
+     },
+     {
+      "value": "Adjust camera angle",
+      "hint": "Re-frame as if shot from elsewhere.",
+      "reveals": [
+       {
+        "kind": "chips",
+        "id": "angle",
+        "label": "Angle",
+        "options": [
+         "Eye level",
+         "Low",
+         "High",
+         "Straight on"
+        ]
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "preActions": {
+   "label": "Framing",
+   "options": [
+    {
+     "id": "transform",
+     "label": "Crop, rotate or flip",
+     "hint": "Adjust the frame by hand.",
+     "icon": "Crop",
+     "mode": "transform",
+     "kind": "canvas"
+    }
+   ]
+  },
+  "labels": {
+   "generate": "Generate corrected image",
+   "result": "Corrected result",
+   "modify": "Modify perspective & reprocess"
+  },
+  "allowBatchExport": false,
+  "engine": "processing"
+ }
+}

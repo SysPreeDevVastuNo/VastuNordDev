@@ -105,8 +105,13 @@ export type Version = {
   createdAt: number;
 };
 
-const LABEL_CLIENT: ProjectLabel = { id: "lbl-client", name: "Client work", color: "#013c55" };
-const LABEL_PRIORITY: ProjectLabel = { id: "lbl-priority", name: "Priority", color: "#fb602b" };
+/** The labels a project can carry; Create project offers all three. */
+export const projectLabels: ProjectLabel[] = [
+  { id: "lbl-priority", name: "Priority", color: "#fb602b" },
+  { id: "lbl-client", name: "Client work", color: "#013c55" },
+  { id: "lbl-personal", name: "Personal", color: "#79716b" },
+];
+const [LABEL_PRIORITY, LABEL_CLIENT] = projectLabels;
 
 export const mockProjects: Project[] = [
   {
@@ -462,7 +467,7 @@ function version(fileId: string, number: number, resultN: number, createdAt: num
 export const mockCredits = 40;
 
 // ---------------------------------------------------------------------------
-// Selectors — the same derivations the prototype's screens make.
+// Helpers over the seed. Selectors over live (editable) state live in store.ts.
 // ---------------------------------------------------------------------------
 
 /** What a file card shows: the current version's result, else the last preview, else the upload. */
@@ -471,22 +476,6 @@ export function fileThumbnail(file: StudioFile) {
   const result = version && mockResults.find((r) => r.id === version.resultId);
   return result?.image || file.preview || file.sourceImage;
 }
-
-const isLive = (f: StudioFile) => f.status === "active" || f.status === "draft";
-
-/** "Continue working": files with an interrupted session first, then most recently edited. */
-export function continueWorkingFiles() {
-  return mockFiles
-    .filter(isLive)
-    .sort((a, b) => Number(!!b.recovery) - Number(!!a.recovery) || b.lastEditedAt - a.lastEditedAt);
-}
-
-export const archivedOrDeletedFileCount = () => mockFiles.filter((f) => !isLive(f)).length;
-
-export const projectFileCount = (projectId: string) =>
-  mockFiles.filter((f) => f.projectId === projectId && isLive(f)).length;
-
-export const projectById = (id?: string) => mockProjects.find((p) => p.id === id);
 
 export const updatedThisWeek = (p: Project) => MOCK_NOW - p.lastUpdatedAt <= 7 * DAY;
 
@@ -518,4 +507,5 @@ export function versionImage(versionId: string) {
   return mockResults.find((r) => r.id === version?.resultId)?.image;
 }
 
-export const fileById = (id: string) => mockFiles.find((f) => f.id === id);
+/** Generations run for a file, failed ones included. */
+export const fileGenerationCount = (fileId: string) => mockGenerations.filter((g) => g.fileId === fileId).length;
