@@ -43,7 +43,7 @@ import ShareExport, { type DeliverTarget } from "@/app/app/editor/[fileId]/_ui/S
 import VersionHistory from "@/app/app/editor/[fileId]/_ui/VersionHistory";
 import type { ToolScreenState, UploadError } from "@/app/app/editor/[fileId]/_ui/useToolScreen";
 import { MAX_PHOTOS } from "@/lib/mock/editorState";
-import { mockImage } from "@/lib/mock/entities";
+import { mockImage, timeAgo } from "@/lib/mock/entities";
 
 /** Wording that changes with what the photo is of. */
 const places = {
@@ -236,6 +236,10 @@ export default function ToolScreen({
   const viewingOld = !!(s.previewId && s.shownVersion && s.shownVersion.id !== s.current?.id);
   const showLatest = view === "latest" || (view === "compare" && !hasResult);
 
+  // "Saved just now" once something changed here (or the file is new); else the last save, if known.
+  const savedLabel =
+    s.canUndo || s.file.createdAt === "Just now" ? "Saved just now" : s.file.savedAt ? `Saved ${timeAgo(s.file.savedAt).toLowerCase()}` : "Saved";
+
   const exit = () => (window.history.length > 1 ? router.back() : router.push("/app/files"));
 
   // What Share & export works on: this file's versions, newest first, each with the photo it was made from.
@@ -353,7 +357,7 @@ export default function ToolScreen({
               {toolName}
               {s.current ? ` · v${s.current.number}` : ""}
             </span>
-            <SavedState label="Saved just now" />
+            <SavedState label={savedLabel} />
           </div>
         </div>
         <IconButton label="Undo" icon={GUndo} onClick={s.undo} disabled={!s.canUndo} />
