@@ -8,6 +8,9 @@ import { MOCK_NOW, mockFiles, mockGenerations, mockResults, mockVersions, type G
 
 type HistoryState = {
   versions: Version[];
+  /** Runs and results made in this browser (the seed's are in entities.ts). */
+  generations: Generation[];
+  results: Result[];
   favourites: Set<string>;
   /** fileId → current version id. */
   current: Record<string, string | undefined>;
@@ -15,6 +18,8 @@ type HistoryState = {
 
 const seed: HistoryState = {
   versions: mockVersions,
+  generations: [],
+  results: [],
   favourites: new Set(mockResults.filter((r) => r.favourite).map((r) => r.id)),
   current: Object.fromEntries(mockFiles.map((f) => [f.id, f.currentVersionId])),
 };
@@ -30,9 +35,11 @@ const HISTORY_KEY = "vastunord.history.v1";
 function readHistory(raw: string | null): Partial<HistoryState> {
   if (!raw) return {};
   try {
-    const d = JSON.parse(raw) as { versions?: Version[]; favourites?: string[]; current?: HistoryState["current"] };
+    const d = JSON.parse(raw) as { versions?: Version[]; generations?: Generation[]; results?: Result[]; favourites?: string[]; current?: HistoryState["current"] };
     return {
       ...(Array.isArray(d.versions) && { versions: d.versions }),
+      ...(Array.isArray(d.generations) && { generations: d.generations }),
+      ...(Array.isArray(d.results) && { results: d.results }),
       ...(Array.isArray(d.favourites) && { favourites: new Set(d.favourites) }),
       ...(d.current && { current: d.current }),
     };
@@ -55,8 +62,8 @@ if (typeof window !== "undefined") {
 const commit = (next: Partial<HistoryState>) => {
   state = { ...state, ...next };
   try {
-    const { versions, favourites, current } = state;
-    window.localStorage.setItem(HISTORY_KEY, JSON.stringify({ versions, favourites: [...favourites], current }));
+    const { versions, generations, results, favourites, current } = state;
+    window.localStorage.setItem(HISTORY_KEY, JSON.stringify({ versions, generations, results, favourites: [...favourites], current }));
   } catch {}
   listeners.forEach((l) => l());
 };
@@ -65,7 +72,7 @@ const loadedAt = Date.now();
 const now = () => MOCK_NOW + (Date.now() - loadedAt);
 
 const resultFor = (s: HistoryState, id: string): Result | undefined => {
-  const r = mockResults.find((x) => x.id === id);
+  const r = mockResults.find((x) => x.id === id) ?? s.results.find((x) => x.id === id);
   return r && { ...r, favourite: s.favourites.has(r.id) };
 };
 
@@ -74,8 +81,8 @@ export function useHistory(fileId: string) {
   const versions = s.versions.filter((v) => v.fileId === fileId).sort((a, b) => a.number - b.number);
   const current = versions.find((v) => v.id === s.current[fileId]) ?? versions[versions.length - 1];
   const resultById = (id: string) => resultFor(s, id);
-  const generationById = (id: string): Generation | undefined => mockGenerations.find((g) => g.id === id);
-  const generations = mockGenerations.filter((g) => g.fileId === fileId);
+  const generationById = (id: string): Generation | undefined => mockGenerations.find((g) => g.id === id) ?? s.generations.find((g) => g.id === id);
+  const generations = [...mockGenerations, ...s.generations].filter((g) => g.fileId === fileId);
   return { versions, current, resultById, generationById, generations };
 }
 
@@ -113,4 +120,28 @@ export function restoreVersion(fileId: string, versionId: string) {
   };
   commit({ versions: [...state.versions, restored], current: { ...state.current, [fileId]: restored.id } });
   return restored;
+}
+
+const uid = () => Math.random().toString(36).slice(2, 8);
+
+/** A finished run: its generation, result and a new current version. Returns the version. */
+export function addGeneratedVersion(fileId: string, image: string, summary: string, cost = 1) {
+  const at = now();
+  const generation: Generation = { id: `gen-${fileId}-${uid()}`, fileId, status: "succeeded", summary, cost, createdAt: at };
+  const result: Result = { id: `res-${fileId}-${uid()}`, fileId, generationId: generation.id, image, favourite: false, createdAt: at };
+  const number = Math.max(0, ...state.versions.filter((v) => v.fileId === fileId).map((v) => v.number)) + 1;
+  const version: Version = { id: `${fileId}-v${number}-${uid()}`, fileId, number, kind: "generated", resultId: result.id, createdAt: at };
+  commit({
+    generations: [...state.generations, generation],
+    results: [...state.results, result],
+    versions: [...state.versions, version],
+    current: { ...state.current, [fileId]: version.id },
+  });
+  return version;
+}
+
+/** A run that did not finish; no credit is spent. */
+export function addFailedGeneration(fileId: string, summary: string) {
+  const generation: Generation = { id: `gen-${fileId}-${uid()}`, fileId, status: "failed", summary, cost: 0, createdAt: now() };
+  commit({ generations: [...state.generations, generation] });
 }

@@ -497,10 +497,10 @@ export default function ToolScreen({
               <StepTracker steps={tracked} />
             </div>
 
-            {s.notConnected && (
+            {s.runError && (
               <div className="px-5 pt-5">
-                <Callout tone="warn" title="Rendering is not connected yet" onDismiss={s.dismissNotConnected}>
-                  Your photo and settings are saved. Results will appear here once the AI providers are connected.
+                <Callout tone="error" title="The render did not finish" onDismiss={s.dismissRunError}>
+                  {s.runError} No credit was spent.
                 </Callout>
               </div>
             )}

@@ -4,15 +4,22 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { toolDef, defaultParams, type ParamValue } from "@/app/app/editor/[fileId]/_tools/defs";
 import { mockCredits } from "@/lib/mock/entities";
 import { emptySelection, useWorking, type Working } from "@/lib/mock/editorState";
-import { restoreVersion, toggleFavourite, useHistory } from "@/lib/mock/history";
+import { addFailedGeneration, addGeneratedVersion, restoreVersion, toggleFavourite, useHistory } from "@/lib/mock/history";
 import { setFileSource, useStudio } from "@/lib/mock/store";
 import { toolById } from "@/lib/mock/tools";
 
 export type Processing = { progress: number };
 
+/** Adds a photo to the form: files made here as a blob, CDN photos by URL (the server fetches those). */
+async function appendPhoto(form: FormData, field: string, src: string) {
+  if (!src) return;
+  if (/^https?:/.test(src)) form.set(`${field}Url`, src);
+  else form.set(field, await (await fetch(src)).blob(), `${field}.jpg`);
+}
+
 // One file's editing session (the prototype's useToolFile): the file, its tool
-// definition, the undoable working state, credits, and generation. Generation
-// is simulated (progress, then "not connected") until the AI providers are wired.
+// definition, the undoable working state, credits, and generation. Generate
+// posts the photo to /api/generate; the result becomes a new current version.
 export function useToolFile(fileId: string) {
   const { files } = useStudio();
   const file = files.find((f) => f.id === fileId);
@@ -60,31 +67,63 @@ export function useToolFile(fileId: string) {
   };
 
   const [processing, setProcessing] = useState<Processing | null>(null);
-  const [notConnected, setNotConnected] = useState(false);
+  const [runError, setRunError] = useState<string | null>(null);
   const [lastSummary, setLastSummary] = useState("");
+  const abort = useRef<AbortController | null>(null);
+  useEffect(() => () => abort.current?.abort(), []);
+
+  const stopTicking = () => {
+    timers.current.forEach(clearTimeout);
+    timers.current = [];
+  };
 
   /** Starts a run. Returns false when one is already running or there is no photo. */
   const generate = (summary: string) => {
-    if (processing || !working.sourceImage) return false;
+    if (processing || !working.sourceImage || !file) return false;
     setLastSummary(summary);
-    setNotConnected(false);
-    setProcessing({ progress: 0 });
+    setRunError(null);
+    setProcessing({ progress: 2 });
+    // The provider gives no progress, so ease towards 92% over about 20 s.
     const tick = (n: number) =>
       run(() => {
-        if (n >= 100) {
-          setProcessing(null);
-          setNotConnected(true);
-          return;
-        }
-        setProcessing({ progress: n });
-        tick(n + 4);
-      }, 0.12);
+        setProcessing({ progress: Math.round(n) });
+        tick(n + (92 - n) * 0.06);
+      }, 0.25);
     tick(4);
+
+    const controller = new AbortController();
+    abort.current = controller;
+    const params = working.params;
+    (async () => {
+      try {
+        const form = new FormData();
+        form.set("toolId", file.toolId);
+        form.set("summary", summary);
+        form.set("prompt", String(params.prompt ?? ""));
+        form.set("negative", String(params.negative ?? ""));
+        await appendPhoto(form, "image", working.sourceImage);
+        await appendPhoto(form, "reference", working.referenceImage);
+        const res = await fetch("/api/generate", { method: "POST", body: form, signal: controller.signal });
+        const data = (await res.json().catch(() => ({}))) as { image?: string; error?: string };
+        if (!res.ok || !data.image) throw new Error(data.error || "The render did not finish. Try again.");
+        stopTicking();
+        setProcessing({ progress: 100 });
+        addGeneratedVersion(fileId, data.image, summary);
+        setPreviewId(null);
+        setProcessing(null);
+      } catch (e) {
+        if (controller.signal.aborted) return;
+        stopTicking();
+        setProcessing(null);
+        addFailedGeneration(fileId, summary);
+        setRunError(e instanceof Error && e.message !== "Failed to fetch" ? e.message : "Could not reach the server. Check your connection and try again.");
+      }
+    })();
     return true;
   };
   const cancelGenerate = () => {
-    timers.current.forEach(clearTimeout);
-    timers.current = [];
+    abort.current?.abort();
+    stopTicking();
     setProcessing(null);
   };
 
@@ -106,8 +145,8 @@ export function useToolFile(fileId: string) {
     processing,
     generate,
     cancelGenerate,
-    notConnected,
-    dismissNotConnected: () => setNotConnected(false),
+    runError,
+    dismissRunError: () => setRunError(null),
     lastSummary,
     versions: history.versions,
     current: history.current,
