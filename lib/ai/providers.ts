@@ -4,6 +4,8 @@
 // Order: MNML (architecture renders) when its key works, then Pollinations.
 // AI_PROVIDERS in the env overrides the order, e.g. "pollinations".
 
+import { REFERENCE_LINE } from "@/lib/ai/prompts";
+
 export type GenerateInput = {
   toolId: string;
   prompt: string;
@@ -40,12 +42,16 @@ const statusKind = (status: number): ProviderError["kind"] =>
 async function pollinations(input: GenerateInput, signal: AbortSignal): Promise<GenerateOutput> {
   const key = process.env.POLLINATIONS_API_KEY;
   if (!key) throw new ProviderError("Pollinations key is not set", "config");
-  const model = process.env.POLLINATIONS_MODEL || "flux-klein";
+  const model = process.env.POLLINATIONS_MODEL || "kontext";
   const form = new FormData();
   form.set("model", model);
-  form.set("prompt", input.prompt);
+  // Identical requests return the cached image; a fresh seed makes Regenerate give a new one.
+  form.set("seed", String(Math.floor(Math.random() * 1_000_000)));
+  // Kontext takes a single image, so the style reference is left out for it.
+  const withReference = !!input.reference && model !== "kontext";
+  form.set("prompt", withReference ? input.prompt : input.prompt.replace(REFERENCE_LINE, ""));
   form.append("image", input.image, "photo.jpg");
-  if (input.reference) form.append("image", input.reference, "reference.jpg");
+  if (withReference && input.reference) form.append("image", input.reference, "reference.jpg");
   const res = await fetch("https://gen.pollinations.ai/v1/images/edits", {
     method: "POST",
     headers: { Authorization: `Bearer ${key}` },

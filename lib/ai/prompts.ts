@@ -2,8 +2,10 @@
 // words) and the user's prompt are added after this, then the "keep" line so
 // the room or building stays the same photo.
 
-const keepRoom = "Keep the same room, walls, windows, doors, ceiling, floor plan and camera angle. Photorealistic, natural light, high detail.";
-const keepSite = "Keep the same building, site, layout and camera angle. Photorealistic, high detail.";
+const keepRoom =
+  "Edit this exact photo. Keep the room exactly as it is: the same walls, windows, doors, ceiling, floor and camera angle. Do not add, remove or move any windows or doors, and keep the floor the same. Photorealistic, natural light.";
+const keepSite =
+  "Edit this exact photo. Keep the building and site exactly as they are: the same walls, windows, doors, roof, layout and camera angle. Do not add, remove or move any windows or doors. Photorealistic.";
 
 const tools: Record<string, { task: string; keep: string }> = {
   "room-reimagination": { task: "Redesign this room's interior in a new style.", keep: keepRoom },
@@ -11,7 +13,7 @@ const tools: Record<string, { task: string; keep: string }> = {
   "decor-redefinition": { task: "Change the decor and accessories in this room.", keep: keepRoom },
   "material-refinement": { task: "Change only the materials and finishes in this room. Do not move or replace furniture.", keep: keepRoom },
   "seasonal-styling": { task: "Style this space for the season described.", keep: keepRoom },
-  "virtual-home-staging": { task: "Furnish and stage this empty room for a property listing.", keep: keepRoom },
+  "virtual-home-staging": { task: "Furnish and stage this empty room for a property listing. Only add furniture, rugs, lighting and decor.", keep: keepRoom },
   "lighting-reimagination": { task: "Relight this room. Change only the lighting and the light fittings.", keep: keepRoom },
   "outdoor-visualization": { task: "Show this outdoor space finished and landscaped.", keep: keepSite },
   "hardscape-design": { task: "Redesign the paving, decking and walls of this outdoor space.", keep: keepSite },
@@ -25,14 +27,16 @@ const tools: Record<string, { task: string; keep: string }> = {
   "perspective-correction": { task: "Correct the perspective so vertical lines are straight.", keep: "Keep the content of the photo the same." },
 };
 
+export const REFERENCE_LINE = " Use the second image as a style reference.";
+
 export const knownTool = (toolId: string) => toolId in tools;
 
 export function buildPrompt({ toolId, summary, prompt, negative, hasReference }: { toolId: string; summary: string; prompt: string; negative: string; hasReference: boolean }) {
   const t = tools[toolId];
-  const parts = [t.task, summary.trim() && `Request: ${summary.trim()}.`];
+  // The model weighs the start most, so what must stay comes first.
+  const parts = [t.keep, t.task, summary.trim() && `Request: ${summary.trim()}.`];
   if (prompt.trim() && !summary.includes(prompt.trim())) parts.push(prompt.trim());
-  if (hasReference) parts.push("Use the second image as a style reference.");
-  parts.push(t.keep);
+  if (hasReference) parts.push(REFERENCE_LINE.trim());
   if (negative.trim()) parts.push(`Avoid: ${negative.trim()}.`);
   return parts.filter(Boolean).join(" ").slice(0, 1900);
 }
